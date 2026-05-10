@@ -20,41 +20,48 @@ const dmSans = DM_Sans({
 const DOMAIN = "https://mubashirali.design";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://yourdomain.com"),
+  metadataBase: new URL("https://www.mubashiralidesign.com"),
   title: {
-    default: "Mubashir Ali | Senior UI/UX & Product Designer",
-    template: "%s | Mubashir Ali",
+    default: "Mubashir Ali | Senior UI/UX & Product Designer — SaaS, B2B, eCommerce",
+    template: "%s | Mubashir Ali — UI/UX Designer",
   },
-  description:
-    "Senior UI/UX and Product Designer specializing in high-fidelity SaaS platforms, B2B dashboards, and scalable design systems.",
-  keywords: ["UI/UX Designer", "Product Designer", "SaaS Design", "Frontend Developer", "Lahore", "Remote Designer"],
-  authors: [{ name: "Mubashir Ali", url: "https://yourdomain.com" }],
+  description: "Senior UI/UX & Product Designer with 5+ years experience designing scalable SaaS, B2B, and eCommerce products. Specialist in Figma, design systems, and high-fidelity prototypes. Available for remote work globally.",
+  keywords: [
+    "UI/UX Designer", "Product Designer", "SaaS Designer", "B2B Dashboard Design",
+    "Figma Expert", "Design Systems", "eCommerce UX", "Mobile App Designer",
+    "Remote UI Designer", "Lahore Designer", "Senior UX Designer",
+    "Webflow Designer", "Framer Designer", "User Research", "Usability Testing",
+    "UI Designer for hire", "Freelance UI/UX Designer", "Pakistani Designer",
+    "AI Product Designer", "SaaS UI Designer"
+  ],
+  authors: [{ name: "Mubashir Ali", url: "https://www.mubashiralidesign.com" }],
   creator: "Mubashir Ali",
-  robots: { index: true, follow: true },
-  alternates: { canonical: "https://yourdomain.com" },
+  publisher: "Mubashir Ali",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" }
+  },
+  alternates: { canonical: "https://www.mubashiralidesign.com" },
   openGraph: {
     type: "website",
-    url: "https://yourdomain.com",
-    siteName: "Mubashir Ali Portfolio",
+    url: "https://www.mubashiralidesign.com",
+    siteName: "Mubashir Ali — Senior UI/UX & Product Designer",
     locale: "en_US",
-    title: "Mubashir Ali | Senior UI/UX & Product Designer",
-    description:
-      "Senior UI/UX and Product Designer specializing in high-fidelity SaaS platforms, B2B dashboards, and scalable design systems.",
-    images: [
-      {
-        url: `https://yourdomain.com/og-image.jpg`,
-        width: 1200,
-        height: 630,
-        alt: "Mubashir Ali — Senior UI/UX & Product Designer Portfolio",
-      },
-    ],
+    title: "Mubashir Ali | Senior UI/UX & Product Designer — SaaS, B2B, eCommerce",
+    description: "5+ years designing scalable SaaS, B2B, and eCommerce products. Figma expert. Design systems specialist. Available for remote work.",
+    images: [{
+      url: "https://www.mubashiralidesign.com/og-image.jpg",
+      width: 1200,
+      height: 630,
+      alt: "Mubashir Ali — Senior UI/UX & Product Designer Portfolio",
+    }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Mubashir Ali | Senior UI/UX & Product Designer",
-    description:
-      "Senior UI/UX and Product Designer specializing in high-fidelity SaaS platforms, B2B dashboards, and scalable design systems.",
-    images: [{ url: `https://yourdomain.com/og-image.jpg`, alt: "Mubashir Ali UI/UX Designer Portfolio" }],
+    description: "5+ years designing SaaS, B2B & eCommerce products. Figma expert. Remote designer.",
+    images: [{ url: "https://www.mubashiralidesign.com/og-image.jpg", alt: "Mubashir Ali UI/UX Designer" }],
   },
   icons: { icon: "/favicon.ico" },
   other: { "theme-color": "#0a0a0a" },
@@ -65,17 +72,16 @@ const personSchema = {
   "@graph": [
     {
       "@type": "Person",
-      "@id": `${DOMAIN}/#person`,
+      "@id": "https://www.mubashiralidesign.com/#person",
       name: "Mubashir Ali",
       givenName: "Mubashir",
       familyName: "Ali",
       jobTitle: "Senior UI/UX & Product Designer",
-      description:
-        "Senior UI/UX & Product Designer with 5+ years of experience designing scalable SaaS, B2B, and eCommerce products for startups and growing companies.",
-      url: DOMAIN,
+      description: "Senior UI/UX & Product Designer with 5+ years of experience designing scalable SaaS, B2B, and eCommerce products for startups and growing companies. Specialist in Figma, design systems, and high-fidelity prototypes.",
+      url: "https://www.mubashiralidesign.com",
       email: "mubashirjaffari@gmail.com",
       telephone: "+923121844917",
-      image: `${DOMAIN}/images/mubashir.jpg`,
+      image: "https://www.mubashiralidesign.com/images/mubashir.jpg",
       address: {
         "@type": "PostalAddress",
         addressLocality: "Lahore",
@@ -88,23 +94,49 @@ const personSchema = {
       ],
       knowsAbout: [
         "UI Design", "UX Design", "Product Design", "SaaS Product Design",
-        "Design Systems", "Figma", "Webflow", "Framer",
-        "User Research", "Usability Testing", "eCommerce UX", "B2B Dashboard Design",
+        "B2B Dashboard Design", "eCommerce UX", "Design Systems", "Figma",
+        "Webflow", "Framer", "User Research", "Usability Testing",
+        "Mobile App Design", "Wireframing", "Prototyping", "AI-Augmented Design",
+        "WCAG Accessibility", "Conversion Rate Optimization"
       ],
+      hasOccupation: {
+        "@type": "Occupation",
+        name: "UI/UX Designer",
+        occupationLocation: { "@type": "Country", name: "Pakistan" },
+        estimatedSalary: {
+          "@type": "MonetaryAmountDistribution",
+          currency: "USD",
+          unitText: "YEAR"
+        }
+      },
       worksFor: {
         "@type": "Organization",
         name: "SparkAI",
         address: { "@type": "PostalAddress", addressLocality: "Dubai", addressCountry: "AE" },
       },
+      alumniOf: {
+        "@type": "CollegeOrUniversity",
+        name: "University of Central Punjab",
+        address: { "@type": "PostalAddress", addressLocality: "Lahore", addressCountry: "PK" }
+      }
     },
     {
       "@type": "WebSite",
-      "@id": `${DOMAIN}/#website`,
-      url: DOMAIN,
-      name: "Mubashir Ali — UI/UX & Product Designer",
-      publisher: { "@id": `${DOMAIN}/#person` },
+      "@id": "https://www.mubashiralidesign.com/#website",
+      url: "https://www.mubashiralidesign.com",
+      name: "Mubashir Ali — Senior UI/UX & Product Designer",
+      description: "Portfolio of Mubashir Ali, Senior UI/UX & Product Designer specializing in SaaS, B2B, and eCommerce products.",
+      publisher: { "@id": "https://www.mubashiralidesign.com/#person" },
       inLanguage: "en-US",
     },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://www.mubashiralidesign.com/#profilepage",
+      url: "https://www.mubashiralidesign.com",
+      name: "Mubashir Ali | Senior UI/UX & Product Designer Portfolio",
+      about: { "@id": "https://www.mubashiralidesign.com/#person" },
+      mainEntity: { "@id": "https://www.mubashiralidesign.com/#person" }
+    }
   ],
 };
 

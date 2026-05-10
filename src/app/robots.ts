@@ -2,11 +2,14 @@ import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: ['/studio/', '/admin/'],
-    },
-    sitemap: 'https://yourdomain.com/sitemap.xml',
+    rules: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/studio/', '/api/'],
+      },
+    ],
+    sitemap: 'https://www.mubashiralidesign.com/sitemap.xml',
+    host: 'https://www.mubashiralidesign.com',
   };
 }

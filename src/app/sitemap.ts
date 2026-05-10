@@ -1,16 +1,36 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://yourdomain.com';
-
   return [
     {
-      url: baseUrl,
+      url: 'https://www.mubashiralidesign.com',
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 1.0,
+      priority: 1,
     },
-    // Note: If projects are fetched dynamically from Sanity later, map over the Sanity slugs here
-    // example: ...sanityProjects.map(project => ({ url: `${baseUrl}/projects/${project.slug}`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 }))
+    {
+      url: 'https://www.mubashiralidesign.com/#selected-projects',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: 'https://www.mubashiralidesign.com/#services',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://www.mubashiralidesign.com/#experience',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: 'https://www.mubashiralidesign.com/#contact',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
   ];
 }
