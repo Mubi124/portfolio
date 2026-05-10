@@ -67,6 +67,16 @@ export default function Skills() {
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 767px) {
+          #skills { padding: 4rem 1.5rem !important; }
+          #skills .grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+          #skills { padding: 5rem 2rem !important; }
+          #skills .grid { grid-template-columns: repeat(3, 1fr) !important; }
+        }
+      `}</style>
     </section>
   );
 }

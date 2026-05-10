@@ -48,10 +48,18 @@ export default function FeaturedWork() {
         </div>
       </div>
       <style>{`
-        @media (max-width: 1024px) {
-          .sticky-card { flex-direction: column !important; height: auto !important; min-height: 80vh !important; }
-          .card-content { flex: none !important; padding: 2.5rem !important; border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.05); }
-          .card-image { flex: none !important; height: 40vh !important; }
+        @media (max-width: 767px) {
+          #selected-projects { padding: 4rem 1.5rem !important; }
+          .sticky-card { flex-direction: column !important; height: auto !important; min-height: auto !important; margin-bottom: 2rem !important; position: relative !important; top: 0 !important; }
+          .card-content { flex: none !important; padding: 1.5rem !important; border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.05); }
+          .card-image { flex: none !important; height: 250px !important; }
+          .card-content h3 { font-size: 1.25rem !important; }
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+          #selected-projects { padding: 5rem 2rem !important; }
+          .sticky-card { flex-direction: column !important; height: auto !important; min-height: auto !important; }
+          .card-content { flex: none !important; padding: 2rem !important; border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.05); }
+          .card-image { flex: none !important; height: 350px !important; }
         }
       `}</style>
     </section>

@@ -136,6 +136,16 @@ export default function Experience() {
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 767px) {
+          #experience { padding: 4rem 1.5rem !important; }
+          #experience h3 { font-size: 1rem !important; }
+          #experience p { font-size: 0.8rem !important; }
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+          #experience { padding: 5rem 2rem !important; }
+        }
+      `}</style>
     </section>
   );
 }

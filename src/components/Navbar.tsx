@@ -13,6 +13,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 80);
@@ -121,7 +122,7 @@ export default function Navbar() {
           {/* Mobile hamburger */}
           <button
             className="nav-hamburger"
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => setIsOpen(!isOpen)}
             style={{
               background: "none",
               border: "none",
@@ -130,40 +131,42 @@ export default function Navbar() {
               lineHeight: 1,
               padding: "0.25rem",
               display: "none",
+              zIndex: 1000,
             }}
             aria-label="Toggle menu"
           >
-            {menuOpen ? "✕" : "☰"}
+            {isOpen ? "✕" : "☰"}
           </button>
         </div>
       </div>
 
-      {/* Mobile dropdown */}
-      {menuOpen && (
+      {/* Mobile dropdown / overlay */}
+      {isOpen && (
         <div
           style={{
-            position: "absolute",
-            top: "100%",
+            position: "fixed",
+            top: 0,
             left: 0,
             right: 0,
-            background: "rgba(10,10,10,0.97)",
-            backdropFilter: "blur(14px)",
-            borderBottom: "1px solid var(--color-border)",
-            padding: "1.5rem 3rem",
+            bottom: 0,
+            background: "#0a0a0a",
+            zIndex: 999,
             display: "flex",
             flexDirection: "column",
-            gap: "1.2rem",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "2rem",
           }}
         >
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              onClick={() => setMenuOpen(false)}
+              onClick={() => setIsOpen(false)}
               style={{
-                color: "var(--color-muted)",
+                color: "white",
                 textDecoration: "none",
-                fontSize: "1rem",
+                fontSize: "2rem",
                 fontFamily: "var(--font-display)",
                 fontWeight: 600,
               }}
@@ -175,9 +178,12 @@ export default function Navbar() {
       )}
 
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
           .nav-links-desktop { display: none !important; }
           .nav-hamburger { display: block !important; }
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+          /* tablet specific if needed, but nav seems okay on tablet */
         }
       `}</style>
     </nav>

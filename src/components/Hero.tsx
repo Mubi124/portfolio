@@ -45,7 +45,7 @@ export default function Hero() {
       </div>
 
       {/* Main Heading - Adjusted clamp for better scaling */}
-      <h1 style={{
+      <h1 className="hero-title" style={{
         fontFamily: "var(--font-display)",
         fontSize: "clamp(3rem, 7vw, 5.5rem)", 
         fontWeight: 900,
@@ -60,7 +60,7 @@ export default function Hero() {
       </h1>
 
       {/* Sub-paragraph - Increased size and legibility */}
-      <p style={{
+      <p className="hero-desc" style={{
         fontSize: "clamp(1.1rem, 2vw, 1.25rem)",
         color: "var(--color-text-secondary)", /* Uses new accessible variable */
         lineHeight: 1.6,
@@ -71,12 +71,12 @@ export default function Hero() {
       </p>
 
       {/* Call to Action Buttons */}
-      <div style={{
+      <div className="hero-buttons" style={{
         display: "flex",
         gap: "1rem",
         alignItems: "center",
       }}>
-        <a href="#selected-projects" style={{
+        <a href="#selected-projects" className="hero-btn" style={{
           padding: "1rem 2rem",
           background: "var(--color-accent)",
           color: "#000",
@@ -84,10 +84,11 @@ export default function Hero() {
           borderRadius: "8px",
           textDecoration: "none",
           transition: "transform 0.2s ease",
+          textAlign: "center"
         }}>
           View Work
         </a>
-        <a href="#contact" style={{
+        <a href="#contact" className="hero-btn" style={{
           padding: "1rem 2rem",
           background: "transparent",
           border: "1px solid var(--color-border)",
@@ -96,10 +97,30 @@ export default function Hero() {
           borderRadius: "8px",
           textDecoration: "none",
           transition: "background 0.2s ease",
+          textAlign: "center"
         }}>
           Let&apos;s Talk
         </a>
       </div>
+
+      <style>{`
+        #hero { padding: 0 2rem; }
+        .hero-title { font-size: clamp(3rem, 7vw, 5.5rem); }
+        .hero-desc { font-size: clamp(1.1rem, 2vw, 1.25rem); }
+        .hero-buttons { flex-direction: row; }
+
+        @media (max-width: 767px) {
+          #hero { padding: 0 1.5rem !important; }
+          .hero-title { font-size: 2rem !important; }
+          .hero-desc { font-size: 0.9rem !important; }
+          .hero-buttons { flex-direction: column !important; width: 100%; }
+          .hero-btn { width: 100%; }
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+          .hero-title { font-size: 3.5rem !important; }
+          .hero-desc { font-size: 1rem !important; }
+        }
+      `}</style>
     </section>
   );
 }

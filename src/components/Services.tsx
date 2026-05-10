@@ -302,13 +302,8 @@ export default function Services() {
       {/* Flip hover CSS */}
       <style>{`
         /* Responsive */
-        @media (max-width: 1024px) {
-          #services > div:last-child {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-        }
-
-        @media (max-width: 640px) {
+        @media (max-width: 767px) {
+          #services { padding: 4rem 1.5rem !important; }
           #services > div:last-child {
             grid-template-columns: 1fr !important;
           }
@@ -325,6 +320,13 @@ export default function Services() {
             transform: none !important;
             backface-visibility: visible !important;
             -webkit-backface-visibility: visible !important;
+          }
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+          #services { padding: 5rem 2rem !important; }
+          #services > div:last-child {
+            grid-template-columns: repeat(2, 1fr) !important;
           }
         }
       `}</style>

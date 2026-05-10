@@ -184,11 +184,14 @@ export default function Contact() {
         </div>
       </div>
       <style>{`
-        @media (max-width: 1023px) {
-          .contact-grid { gap: 3rem !important; }
-        }
         @media (max-width: 767px) {
+          #contact { padding: 4rem 1.5rem !important; }
           .contact-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
+          .contact-grid > div > form > div { grid-template-columns: 1fr !important; }
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+          #contact { padding: 5rem 2rem !important; }
+          .contact-grid { gap: 3rem !important; }
         }
       `}</style>
     </section>

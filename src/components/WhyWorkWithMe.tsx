@@ -26,7 +26,7 @@ const reasons = [
 
 export default function WhyWorkWithMe() {
   return (
-    <section className="bg-black text-white py-32 px-8">
+    <section id="why-work" className="bg-black text-white py-32 px-8">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -58,6 +58,16 @@ export default function WhyWorkWithMe() {
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 767px) {
+          #why-work { padding: 4rem 1.5rem !important; }
+          #why-work .grid { grid-template-columns: 1fr !important; }
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+          #why-work { padding: 5rem 2rem !important; }
+          #why-work .grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+      `}</style>
     </section>
   );
 }

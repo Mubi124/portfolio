@@ -78,7 +78,17 @@ export default function Process() {
           ))}
         </div>
       </div>
-      <style>{`@media (max-width: 900px) { .process-grid { grid-template-columns: 1fr !important; } }`}</style>
+      <style>{`
+        @media (max-width: 767px) {
+          #process { padding: 4rem 1.5rem !important; }
+          .process-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+          .process-grid > div { padding: 2rem !important; } /* Ensure cards are full width/have right padding */
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+          #process { padding: 5rem 2rem !important; }
+          .process-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1.5rem !important; }
+        }
+      `}</style>
     </section>
   );
 }

@@ -165,18 +165,22 @@ export default function About() {
 
       {/* Responsive rules */}
       <style>{`
-        @media (max-width: 1023px) {
-          .about-grid {
-            gap: 3rem !important;
-          }
-        }
         @media (max-width: 767px) {
+          #about { padding: 4rem 1.5rem !important; }
           .about-grid {
             grid-template-columns: 1fr !important;
             gap: 2.5rem !important;
           }
           .about-grid > div:first-child {
             aspect-ratio: 4/3 !important;
+          }
+          .about-grid h2 { font-size: clamp(2rem, 8vw, 2.5rem) !important; }
+          .about-grid p { font-size: 1rem !important; }
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+          #about { padding: 5rem 2rem !important; }
+          .about-grid {
+            gap: 3rem !important;
           }
         }
       `}</style>

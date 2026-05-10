@@ -9,6 +9,7 @@ export default function Marquee({ items, direction = "left" }: MarqueeProps) {
 
   return (
     <div
+      className="marquee-container"
       style={{
         overflow: "hidden",
         borderTop: "1px solid var(--color-border)",
@@ -31,6 +32,7 @@ export default function Marquee({ items, direction = "left" }: MarqueeProps) {
         {tripled.map((item, i) => (
           <span
             key={i}
+            className="marquee-text"
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 700,
@@ -57,6 +59,23 @@ export default function Marquee({ items, direction = "left" }: MarqueeProps) {
           </span>
         ))}
       </div>
+      <style>{`
+        .marquee-container {
+          padding: 1.1rem 0;
+        }
+        .marquee-text {
+          font-size: 0.78rem;
+          padding: 0 1.5rem;
+        }
+        @media (max-width: 767px) {
+          .marquee-container {
+            padding: 1rem 0 !important;
+          }
+          .marquee-text {
+            font-size: 0.875rem !important; /* Made larger as requested? Wait, the plan says 'reduce font size to 0.875rem' but it was 0.78. 0.875 is actually bigger. I will set it exactly to 0.875rem */
+          }
+        }
+      `}</style>
     </div>
   );
 }

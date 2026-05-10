@@ -10,6 +10,7 @@ export default function Footer() {
       }}
     >
       <div
+        className="footer-container"
         style={{
           maxWidth:       "1240px",
           margin:         "0 auto",
@@ -46,7 +47,7 @@ export default function Footer() {
         </p>
 
         {/* Right: social links */}
-        <div style={{ display: "flex", gap: "1.5rem" }}>
+        <div className="footer-socials" style={{ display: "flex", gap: "1.5rem" }}>
           {[
             { label: "LinkedIn", href: "https://www.linkedin.com/in/mubashir-ali-design/" },
             { label: "Figma", href: "https://www.figma.com/design/wVKfD2BtFeiXymCvYZOWno/Portfolio" },
@@ -71,6 +72,19 @@ export default function Footer() {
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 767px) {
+          footer { padding: 3rem 1.5rem !important; }
+          .footer-container { flex-direction: column !important; justify-content: center !important; text-align: center !important; gap: 2rem !important; }
+          .footer-socials { justify-content: center !important; width: 100% !important; }
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+          footer { padding: 3rem 2rem !important; }
+          .footer-container { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 2rem !important; }
+          .footer-container p { grid-column: span 2; order: 3; }
+          .footer-socials { justify-content: flex-end !important; }
+        }
+      `}</style>
     </footer>
   );
 }

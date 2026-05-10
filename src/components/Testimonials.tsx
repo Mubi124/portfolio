@@ -147,12 +147,15 @@ const Testimonials = () => {
         .name { color: #fff; font-weight: 600; font-size: 0.9rem; }
         .meta { color: #666; font-size: 0.8rem; }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 767px) {
+          #testimonials { padding: 4rem 1.5rem !important; }
+          .bento-grid { grid-template-columns: 1fr !important; }
+          .bento-card { grid-column: span 1 !important; padding: 1.5rem !important; }
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+          #testimonials { padding: 5rem 2rem !important; }
           .bento-grid { grid-template-columns: 1fr 1fr !important; }
           .bento-card { grid-column: span 1 !important; }
-        }
-        @media (max-width: 640px) {
-          .bento-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>
