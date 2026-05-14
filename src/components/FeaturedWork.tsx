@@ -6,10 +6,10 @@ export default function FeaturedWork() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://6272nx4u.api.sanity.io/v2024-05-08/data/query/production?query=*[_type=="project"]|order(order asc){title,description,tags,image,caseStudyUrl,slug}`)
+    fetch('/api/projects')
       .then(res => res.json())
       .then(data => {
-        setProjects(data.result || []);
+        setProjects(data || []);
         setLoading(false);
       })
       .catch(() => setLoading(false));
