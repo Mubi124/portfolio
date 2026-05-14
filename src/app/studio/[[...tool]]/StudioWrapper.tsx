@@ -1,9 +1,13 @@
 'use client';
-
 import dynamic from 'next/dynamic';
 
-const Studio = dynamic(() => import('./Studio'), { ssr: false });
+const NextStudio = dynamic(
+  () => import('next-sanity/studio').then(mod => ({ default: mod.NextStudio })),
+  { ssr: false }
+);
+
+import config from '../../../../sanity.config';
 
 export default function StudioWrapper() {
-  return <Studio />;
+  return <NextStudio config={config} />;
 }
