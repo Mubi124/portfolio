@@ -1,20 +1,32 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { client } from "@/sanity/lib/client";
-import imageUrlBuilder from "@sanity/image-url";
-
-const builder = imageUrlBuilder(client);
-function urlFor(source: any) {
-  return builder.image(source).width(1400).height(900).url();
-}
 
 export default function FeaturedWork() {
   const [projects, setProjects] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    client.fetch(`*[_type == "project"] | order(order asc) { title, description, tags, image, caseStudyUrl }`)
-      .then((data) => setProjects(data));
+    fetch(`https://6272nx4u.api.sanity.io/v2024-05-08/data/query/production?query=*[_type=="project"]|order(order asc){title,description,tags,image,caseStudyUrl,slug}`)
+      .then(res => res.json())
+      .then(data => {
+        setProjects(data.result || []);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, []);
+
+  const urlFor = (image: any) => {
+    if (!image?.asset?._ref) return null;
+    const ref = image.asset._ref;
+    const [,id,dimensions,format] = ref.match(/^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/);
+    return `https://cdn.sanity.io/images/6272nx4u/production/${id}-${dimensions}.${format}`;
+  };
+
+  if (loading) return (
+    <section style={{ padding: "8rem 2rem", background: "#0a0a0a", textAlign: "center" }}>
+      <p style={{ color: "#666" }}>Loading projects...</p>
+    </section>
+  );
 
   return (
     <section id="selected-projects" style={{ padding: "8rem 2rem", background: "var(--color-bg, #0a0a0a)", position: "relative" }}>
@@ -39,8 +51,8 @@ export default function FeaturedWork() {
                 )}
               </div>
               <div className="card-image" style={{ flex: "1", background: "#0d0d0d" }}>
-                {project.image && (
-                  <img src={urlFor(project.image)} alt={project.title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center" }} />
+                {urlFor(project.image) && (
+                  <img src={urlFor(project.image)!} alt={project.title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center" }} />
                 )}
               </div>
             </div>
@@ -49,17 +61,9 @@ export default function FeaturedWork() {
       </div>
       <style>{`
         @media (max-width: 767px) {
-          #selected-projects { padding: 4rem 1.5rem !important; }
-          .sticky-card { flex-direction: column !important; height: auto !important; min-height: auto !important; margin-bottom: 2rem !important; position: relative !important; top: 0 !important; }
-          .card-content { flex: none !important; padding: 1.5rem !important; border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.05); }
-          .card-image { flex: none !important; height: 250px !important; }
-          .card-content h3 { font-size: 1.25rem !important; }
-        }
-        @media (min-width: 768px) and (max-width: 1024px) {
-          #selected-projects { padding: 5rem 2rem !important; }
-          .sticky-card { flex-direction: column !important; height: auto !important; min-height: auto !important; }
-          .card-content { flex: none !important; padding: 2rem !important; border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.05); }
-          .card-image { flex: none !important; height: 350px !important; }
+          .sticky-card { flex-direction: column !important; height: auto !important; min-height: 80vh !important; }
+          .card-content { flex: none !important; padding: 2.5rem !important; border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.05); }
+          .card-image { flex: none !important; height: 40vh !important; }
         }
       `}</style>
     </section>
