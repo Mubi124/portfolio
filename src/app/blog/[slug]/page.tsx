@@ -1,6 +1,7 @@
 import { client } from '@/sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 
 export const revalidate = 60;
 
@@ -21,6 +22,31 @@ function urlFor(image: any) {
   return `https://cdn.sanity.io/images/6272nx4u/production/${match[1]}-${match[2]}.${match[3]}`;
 }
 
+function formatDate(date: string) {
+  if (!date) return '';
+  return new Date(date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+const ptComponents = {
+  types: {
+    image: ({ value }: any) => {
+      const url = urlFor(value);
+      if (!url) return null;
+      return <img src={url} alt="" style={{ width: '100%', borderRadius: '12px', margin: '2.5rem 0' }} />;
+    },
+  },
+  block: {
+    h2: ({ children }: any) => <h2 style={{ fontSize: '1.85rem', fontWeight: 800, color: '#fff', margin: '3rem 0 1.25rem', letterSpacing: '-0.02em' }}>{children}</h2>,
+    h3: ({ children }: any) => <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', margin: '2.5rem 0 1rem' }}>{children}</h3>,
+    normal: ({ children }: any) => <p style={{ fontSize: '1.1rem', color: '#c0c0c0', lineHeight: 1.85, margin: '0 0 1.5rem' }}>{children}</p>,
+    blockquote: ({ children }: any) => <blockquote style={{ borderLeft: '3px solid #e8c97a', paddingLeft: '1.5rem', margin: '2rem 0', fontStyle: 'italic', color: '#d8d8d8', fontSize: '1.2rem' }}>{children}</blockquote>,
+  },
+  list: {
+    bullet: ({ children }: any) => <ul style={{ color: '#c0c0c0', fontSize: '1.1rem', lineHeight: 1.8, margin: '0 0 1.5rem', paddingLeft: '1.5rem' }}>{children}</ul>,
+    number: ({ children }: any) => <ol style={{ color: '#c0c0c0', fontSize: '1.1rem', lineHeight: 1.8, margin: '0 0 1.5rem', paddingLeft: '1.5rem' }}>{children}</ol>,
+  },
+};
+
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = await getPost(slug);
@@ -28,15 +54,31 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   if (!post) notFound();
 
   return (
-    <main style={{ background: '#0a0a0a', minHeight: '100vh', padding: '8rem 2rem' }}>
+    <main style={{ background: '#0a0a0a', minHeight: '100vh', padding: '7rem 2rem 6rem' }}>
       <article style={{ maxWidth: '760px', margin: '0 auto' }}>
-        <span style={{ fontSize: '0.75rem', color: '#e8c97a', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>{post.category}</span>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, color: '#fff', margin: '1rem 0 2rem', letterSpacing: '-0.02em' }}>{post.title}</h1>
-        {urlFor(post.coverImage) && (
-          <img src={urlFor(post.coverImage)!} alt={post.title} style={{ width: '100%', borderRadius: '16px', marginBottom: '2.5rem' }} />
+        <Link href="/blog" style={{ color: '#888', fontSize: '0.9rem', textDecoration: 'none', marginBottom: '2.5rem', display: 'inline-block' }}>← Back to blog</Link>
+
+        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1.5rem' }}>
+          <span style={{ fontSize: '0.72rem', color: '#0a0a0a', background: '#e8c97a', padding: '0.4rem 0.9rem', borderRadius: '100px', textTransform: 'uppercase', letterSpacing: '0.07em', fontWeight: 800 }}>{post.category}</span>
+          <span style={{ fontSize: '0.85rem', color: '#666' }}>{formatDate(post.publishedAt)}</span>
+        </div>
+
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.25rem, 5vw, 3.75rem)', fontWeight: 900, color: '#fff', margin: '0 0 1.5rem', letterSpacing: '-0.03em', lineHeight: 1.05 }}>{post.title}</h1>
+
+        {post.excerpt && (
+          <p style={{ fontSize: '1.3rem', color: '#999', lineHeight: 1.5, marginBottom: '3rem' }}>{post.excerpt}</p>
         )}
-        <div style={{ color: '#c0c0c0', fontSize: '1.1rem', lineHeight: 1.8 }}>
-          <PortableText value={post.body} />
+
+        {urlFor(post.coverImage) && (
+          <img src={urlFor(post.coverImage)!} alt={post.title} style={{ width: '100%', borderRadius: '20px', marginBottom: '3.5rem' }} />
+        )}
+
+        <div>
+          <PortableText value={post.body} components={ptComponents} />
+        </div>
+
+        <div style={{ marginTop: '5rem', paddingTop: '3rem', borderTop: '1px solid rgba(255,255,255,0.08)', textAlign: 'center' }}>
+          <Link href="/blog" style={{ color: '#e8c97a', fontWeight: 700, textDecoration: 'none' }}>← Read more articles</Link>
         </div>
       </article>
     </main>

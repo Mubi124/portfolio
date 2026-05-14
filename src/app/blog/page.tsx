@@ -19,28 +19,63 @@ function urlFor(image: any) {
   return `https://cdn.sanity.io/images/6272nx4u/production/${match[1]}-${match[2]}.${match[3]}`;
 }
 
+function formatDate(date: string) {
+  if (!date) return '';
+  return new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
 export default async function BlogPage() {
   const posts = await getPosts();
+  const featured = posts[0];
+  const rest = posts.slice(1);
 
   return (
-    <main style={{ background: '#0a0a0a', minHeight: '100vh', padding: '8rem 2rem' }}>
+    <main style={{ background: '#0a0a0a', minHeight: '100vh', padding: '8rem 2rem 6rem' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ marginBottom: '5rem', textAlign: 'center' }}>
-          <p style={{ fontSize: '0.75rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: '#e8c97a', marginBottom: '1rem', fontWeight: 700 }}>Blog</p>
-          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 900, color: '#fff', letterSpacing: '-0.03em' }}>Thoughts & Insights</h1>
+        <div style={{ marginBottom: '5rem' }}>
+          <p style={{ fontSize: '0.75rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: '#e8c97a', marginBottom: '1rem', fontWeight: 700 }}>The Blog</p>
+          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 900, color: '#fff', letterSpacing: '-0.04em', lineHeight: 1 }}>Design Notes & Insights</h1>
+          <p style={{ color: '#888', fontSize: '1.1rem', marginTop: '1.5rem', maxWidth: '560px' }}>Thoughts on UI/UX, product design, motion, and the craft of building digital experiences.</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '2rem' }}>
-          {posts.map((post: any, i: number) => (
+        {featured && (
+          <Link href={`/blog/${featured.slug?.current}`} style={{ textDecoration: 'none' }}>
+            <article className="featured-post" style={{ display: 'flex', gap: '3rem', background: '#121212', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.08)', overflow: 'hidden', marginBottom: '4rem', alignItems: 'stretch' }}>
+              {urlFor(featured.coverImage) && (
+                <div style={{ flex: '0 0 55%', position: 'relative' }}>
+                  <img src={urlFor(featured.coverImage)!} alt={featured.title} style={{ width: '100%', height: '100%', objectFit: 'cover', minHeight: '380px' }} />
+                </div>
+              )}
+              <div style={{ flex: '1', padding: '3rem 3rem 3rem 0', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1.25rem' }}>
+                  <span style={{ fontSize: '0.7rem', color: '#0a0a0a', background: '#e8c97a', padding: '0.35rem 0.85rem', borderRadius: '100px', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>{featured.category}</span>
+                  <span style={{ fontSize: '0.8rem', color: '#666' }}>{formatDate(featured.publishedAt)}</span>
+                </div>
+                <h2 style={{ fontSize: 'clamp(1.75rem, 3vw, 2.75rem)', fontWeight: 800, color: '#fff', lineHeight: 1.1, marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>{featured.title}</h2>
+                <p style={{ fontSize: '1.05rem', color: '#a0a0a0', lineHeight: 1.6, marginBottom: '2rem' }}>{featured.excerpt}</p>
+                <span style={{ color: '#e8c97a', fontWeight: 700, fontSize: '0.95rem' }}>Read article →</span>
+              </div>
+            </article>
+          </Link>
+        )}
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))', gap: '2.5rem' }}>
+          {rest.map((post: any, i: number) => (
             <Link key={i} href={`/blog/${post.slug?.current}`} style={{ textDecoration: 'none' }}>
-              <article style={{ background: '#121212', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)', overflow: 'hidden', height: '100%' }}>
+              <article className="blog-card" style={{ background: '#121212', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.08)', overflow: 'hidden', height: '100%', transition: 'transform 0.3s ease, border-color 0.3s ease' }}>
                 {urlFor(post.coverImage) && (
-                  <img src={urlFor(post.coverImage)!} alt={post.title} style={{ width: '100%', height: '220px', objectFit: 'cover' }} />
+                  <div style={{ overflow: 'hidden', height: '240px' }}>
+                    <img src={urlFor(post.coverImage)!} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
                 )}
-                <div style={{ padding: '1.5rem' }}>
-                  <span style={{ fontSize: '0.7rem', color: '#e8c97a', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>{post.category}</span>
-                  <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff', margin: '0.75rem 0' }}>{post.title}</h2>
-                  <p style={{ fontSize: '0.95rem', color: '#a0a0a0', lineHeight: 1.5 }}>{post.excerpt}</p>
+                <div style={{ padding: '1.75rem' }}>
+                  <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'center', marginBottom: '1rem' }}>
+                    <span style={{ fontSize: '0.68rem', color: '#e8c97a', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>{post.category}</span>
+                    <span style={{ fontSize: '0.75rem', color: '#666' }}>·</span>
+                    <span style={{ fontSize: '0.75rem', color: '#666' }}>{formatDate(post.publishedAt)}</span>
+                  </div>
+                  <h2 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#fff', margin: '0 0 0.85rem', lineHeight: 1.25, letterSpacing: '-0.01em' }}>{post.title}</h2>
+                  <p style={{ fontSize: '0.95rem', color: '#a0a0a0', lineHeight: 1.55 }}>{post.excerpt}</p>
                 </div>
               </article>
             </Link>
@@ -48,9 +83,20 @@ export default async function BlogPage() {
         </div>
 
         {posts.length === 0 && (
-          <p style={{ textAlign: 'center', color: '#666' }}>No posts yet. Check back soon.</p>
+          <div style={{ textAlign: 'center', padding: '6rem 0' }}>
+            <p style={{ color: '#666', fontSize: '1.1rem' }}>No posts yet. Check back soon.</p>
+          </div>
         )}
       </div>
+
+      <style>{`
+        .blog-card:hover { transform: translateY(-6px); border-color: rgba(232,201,122,0.3) !important; }
+        @media (max-width: 900px) {
+          .featured-post { flex-direction: column !important; gap: 0 !important; }
+          .featured-post > div:first-child { flex: none !important; }
+          .featured-post > div:last-child { padding: 2rem !important; }
+        }
+      `}</style>
     </main>
   );
 }
