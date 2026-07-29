@@ -1,5 +1,23 @@
 import { client } from '@/sanity/lib/client';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Blog — Design Notes & Insights',
+  description: 'Thoughts on UI/UX, product design, motion, and the craft of building digital experiences by Mubashir Ali.',
+  openGraph: {
+    title: 'Blog — Mubashir Ali',
+    description: 'Thoughts on UI/UX, product design, motion, and the craft of building digital experiences.',
+    url: 'https://www.mubashiralidesign.com/blog',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog — Mubashir Ali | UI/UX Designer',
+    description: 'Thoughts on UI/UX, product design, motion, and the craft of building digital experiences.',
+  },
+  alternates: { canonical: 'https://www.mubashiralidesign.com/blog' },
+};
 
 export const revalidate = 60;
 

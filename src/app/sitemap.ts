@@ -1,36 +1,58 @@
 import { MetadataRoute } from 'next';
+import { client } from '@/sanity/lib/client';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+const BASE = 'https://www.mubashiralidesign.com';
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Fetch all published post slugs + dates from Sanity
+  const posts = await client.fetch<{ slug: { current: string }; publishedAt: string }[]>(
+    `*[_type == "post" && defined(slug.current)]{ slug, publishedAt }`
+  );
+
+  const postEntries: MetadataRoute.Sitemap = posts.map((p) => ({
+    url: `${BASE}/blog/${p.slug.current}`,
+    lastModified: p.publishedAt ? new Date(p.publishedAt) : new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }));
+
   return [
     {
-      url: 'https://www.mubashiralidesign.com',
+      url: BASE,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: 'https://www.mubashiralidesign.com/#selected-projects',
+      url: `${BASE}/#selected-projects`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
-      url: 'https://www.mubashiralidesign.com/#services',
+      url: `${BASE}/#services`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: 'https://www.mubashiralidesign.com/#experience',
+      url: `${BASE}/#experience`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: 'https://www.mubashiralidesign.com/#contact',
+      url: `${BASE}/#contact`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    {
+      url: `${BASE}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    ...postEntries,
   ];
 }

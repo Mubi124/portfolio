@@ -2,8 +2,54 @@ import { client } from '@/sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 
 export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const slugs = await client.fetch<{ slug: { current: string } }[]>(
+    `*[_type == "post" && defined(slug.current)]{ slug }`
+  );
+  return slugs.map((s) => ({ slug: s.slug.current }));
+}
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await client.fetch<{ title: string; excerpt: string; coverImage?: any } | null>(
+    `*[_type == "post" && slug.current == $slug][0]{ title, excerpt, coverImage }`,
+    { slug }
+  );
+  if (!post) return {};
+
+  function urlFor(image: any) {
+    if (!image?.asset?._ref) return null;
+    const ref = image.asset._ref;
+    const match = ref.match(/^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/);
+    if (!match) return null;
+    return `https://cdn.sanity.io/images/6272nx4u/production/${match[1]}-${match[2]}.${match[3]}`;
+  }
+
+  const ogImage = urlFor(post.coverImage) ?? 'https://www.mubashiralidesign.com/og-image.jpg';
+
+  return {
+    title: post.title,
+    description: post.excerpt ?? '',
+    openGraph: {
+      title: post.title,
+      description: post.excerpt ?? '',
+      images: [{ url: ogImage }],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt ?? '',
+      images: [ogImage],
+    },
+  };
+}
 
 async function getPost(slug: string) {
   return await client.fetch(

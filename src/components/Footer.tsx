@@ -51,6 +51,7 @@ export default function Footer() {
           {[
             { label: "LinkedIn", href: "https://www.linkedin.com/in/mubashir-ali-design/" },
             { label: "Figma", href: "https://www.figma.com/design/wVKfD2BtFeiXymCvYZOWno/Portfolio" },
+            { label: "Blog", href: "/blog" },
             { label: "Email", href: "mailto:mubashirjaffari@gmail.com" },
           ].map((s) => (
             <a
