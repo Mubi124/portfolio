@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import Link from "next/link";
 
 const navLinks = [
   { name: "Work",       href: "#projects"   },
@@ -56,8 +55,8 @@ export default function Navbar() {
         }}
       >
         {/* Logo */}
-        <Link
-          href="#hero"
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: 800,
@@ -65,10 +64,14 @@ export default function Navbar() {
             letterSpacing: "-0.02em",
             color: "var(--color-text)",
             textDecoration: "none",
+            background: "none",
+            border: "none",
+            padding: 0,
+            cursor: "pointer",
           }}
         >
           Mubashir
-        </Link>
+        </button>
 
         {/* Desktop nav links */}
         <div
