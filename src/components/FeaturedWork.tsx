@@ -1,32 +1,78 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
+interface SanityImage {
+  asset?: {
+    _ref?: string;
+  };
+}
+
+interface Project {
+  title?: string;
+  description?: string;
+  tags?: string[];
+  image?: SanityImage;
+  imageUrl?: string;
+  caseStudyUrl?: string;
+}
+
+const defaultProjects: Project[] = [
+  {
+    title: "Contrario AI Recruiting Platform",
+    description: "AI-powered recruiting platform featuring specialized recruiter dashboards, intelligent AI-assisted workflows, and permission-aware views designed for enterprise hiring teams.",
+    tags: ["Recruiter Dashboards", "AI Workflows", "Permission-Aware Views", "Enterprise SaaS"],
+    imageUrl: "/images/projects/contrario.jpg",
+    caseStudyUrl: "#",
+  },
+  {
+    title: "LeadPilot AI Lead Intelligence CRM",
+    description: "Next-generation lead intelligence CRM incorporating automated AI lead scoring, dynamic outreach generation, and streamlined pipeline management.",
+    tags: ["AI Lead Scoring", "Outreach Generation", "Pipeline Management", "Sales CRM"],
+    imageUrl: "/images/projects/spark.jpg",
+    caseStudyUrl: "#",
+  },
+  {
+    title: "NavSphere - Travel Operations Dashboard",
+    description: "High-density travel operations control center featuring data-rich B2B dashboards, multi-parameter filtering, and real-time decision-support interfaces.",
+    tags: ["Data-Rich B2B Dashboards", "Advanced Filtering", "Decision Support", "Travel Ops"],
+    imageUrl: "/images/projects/nexuses.jpg",
+    caseStudyUrl: "#",
+  },
+];
+
 export default function FeaturedWork() {
-  const [projects, setProjects] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState<Project[]>(defaultProjects);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetch('/api/projects')
       .then(res => res.json())
-      .then(data => {
-        setProjects(data || []);
-        setLoading(false);
+      .then((data: Project[]) => {
+        if (data && data.length > 0) {
+          setProjects(data);
+        }
       })
-      .catch(() => setLoading(false));
+      .catch(() => {
+        // Keep defaultProjects on error
+      });
   }, []);
 
-  const urlFor = (image: any) => {
+  const urlFor = (image?: SanityImage) => {
     if (!image?.asset?._ref) return null;
     const ref = image.asset._ref;
-    const [,id,dimensions,format] = ref.match(/^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/);
+    const [,id,dimensions,format] = ref.match(/^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/) || [];
+    if (!id || !dimensions || !format) return null;
     return `https://cdn.sanity.io/images/6272nx4u/production/${id}-${dimensions}.${format}`;
   };
 
-  if (loading) return (
-    <section style={{ padding: "8rem 2rem", background: "#0a0a0a", textAlign: "center" }}>
-      <p style={{ color: "#666" }}>Loading projects...</p>
-    </section>
-  );
+  const getProjectImage = (project: Project) => {
+    if (project.imageUrl) return project.imageUrl;
+    if (project.image) {
+      const sanityUrl = urlFor(project.image);
+      if (sanityUrl) return sanityUrl;
+    }
+    return "/images/projects/contrario.jpg";
+  };
 
   return (
     <section id="selected-projects" style={{ padding: "8rem 2rem", background: "var(--color-bg, #0a0a0a)", position: "relative" }}>
@@ -36,27 +82,29 @@ export default function FeaturedWork() {
           <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.5rem, 5vw, 4.5rem)", fontWeight: 900, letterSpacing: "-0.03em", color: "#ffffff" }}>Selected Projects</h2>
         </div>
         <div className="projects-stack" style={{ position: "relative" }}>
-          {projects.map((project, index) => (
-            <div key={index} className="sticky-card" style={{ position: "sticky", top: `calc(10vh + ${index * 40}px)`, height: "75vh", minHeight: "500px", marginBottom: "15vh", background: "#121212", borderRadius: "24px", border: "1px solid rgba(255,255,255,0.08)", overflow: "hidden", display: "flex", flexDirection: "row", zIndex: index, boxShadow: "0 -20px 50px rgba(0,0,0,0.6)" }}>
-              <div className="card-content" style={{ flex: "0 0 40%", padding: "4rem", display: "flex", flexDirection: "column", justifyContent: "center", borderRight: "1px solid rgba(255,255,255,0.05)" }}>
-                <h3 style={{ fontSize: "clamp(1.5rem, 2.5vw, 2.5rem)", fontWeight: 800, color: "#ffffff", lineHeight: 1.1, marginBottom: "1.5rem" }}>{project.title}</h3>
-                <p style={{ fontSize: "1.1rem", color: "#a0a0a0", lineHeight: 1.6, marginBottom: "2.5rem" }}>{project.description}</p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "auto" }}>
-                  {project.tags?.map((tag: string, i: number) => (
-                    <span key={i} style={{ padding: "0.4rem 1rem", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "100px", fontSize: "0.75rem", color: "#d0d0d0", letterSpacing: "0.05em" }}>{tag}</span>
-                  ))}
+          {projects.map((project, index) => {
+            const imgSrc = getProjectImage(project);
+            return (
+              <div key={index} className="sticky-card" style={{ position: "sticky", top: `calc(10vh + ${index * 40}px)`, height: "75vh", minHeight: "500px", marginBottom: "15vh", background: "#121212", borderRadius: "24px", border: "1px solid rgba(255,255,255,0.08)", overflow: "hidden", display: "flex", flexDirection: "row", zIndex: index, boxShadow: "0 -20px 50px rgba(0,0,0,0.6)" }}>
+                <div className="card-content" style={{ flex: "0 0 40%", padding: "4rem", display: "flex", flexDirection: "column", justifyContent: "center", borderRight: "1px solid rgba(255,255,255,0.05)" }}>
+                  <h3 style={{ fontSize: "clamp(1.5rem, 2.5vw, 2.5rem)", fontWeight: 800, color: "#ffffff", lineHeight: 1.1, marginBottom: "1.5rem" }}>{project.title}</h3>
+                  <p style={{ fontSize: "1.1rem", color: "#a0a0a0", lineHeight: 1.6, marginBottom: "2.5rem" }}>{project.description}</p>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "auto" }}>
+                    {project.tags?.map((tag: string, i: number) => (
+                      <span key={i} style={{ padding: "0.4rem 1rem", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "100px", fontSize: "0.75rem", color: "#d0d0d0", letterSpacing: "0.05em" }}>{tag}</span>
+                    ))}
+                  </div>
+                  {project.caseStudyUrl && (
+                    <a href={project.caseStudyUrl} style={{ alignSelf: "flex-start", padding: "1rem 2rem", background: "var(--color-accent, #e8c97a)", color: "#000", fontWeight: 700, borderRadius: "8px", textDecoration: "none", marginTop: "2rem", display: "inline-block" }}>View Case Study</a>
+                  )}
                 </div>
-                {project.caseStudyUrl && (
-                  <a href={project.caseStudyUrl} target="_blank" rel="noopener noreferrer" style={{ alignSelf: "flex-start", padding: "1rem 2rem", background: "var(--color-accent, #e8c97a)", color: "#000", fontWeight: 700, borderRadius: "8px", textDecoration: "none", marginTop: "2rem", display: "inline-block" }}>View Case Study</a>
-                )}
+                <div className="card-image" style={{ flex: "1", background: "#0d0d0d" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={imgSrc} alt={project.title || "Project image"} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center" }} />
+                </div>
               </div>
-              <div className="card-image" style={{ flex: "1", background: "#0d0d0d" }}>
-                {urlFor(project.image) && (
-                  <img src={urlFor(project.image)!} alt={project.title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center" }} />
-                )}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
       <style>{`

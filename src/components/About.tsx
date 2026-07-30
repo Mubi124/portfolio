@@ -115,9 +115,8 @@ export default function About() {
               marginBottom: "1rem",
             }}
           >
-            I&apos;m Mubashir, a Senior UI/UX &amp; Product Designer based in Lahore, Pakistan.
-            I specialize in designing digital products that do two things well — they work for
-            users, and they work for the business.
+            I&apos;m Mubashir, a UX/UI &amp; Product Designer based in Lahore, Pakistan.
+            I specialize in designing digital products — with a core focus on AI-Powered B2B SaaS — that do two things well — work for users and drive business growth.
           </p>
 
           {/* Body paragraph 2 */}
@@ -129,8 +128,8 @@ export default function About() {
               marginBottom: "2rem",
             }}
           >
-            Over 5+ years, I&apos;ve owned end-to-end product design for SaaS platforms, B2B
-            dashboards, and eCommerce apps — from initial research through shipped design
+            Over 5+ years, I&apos;ve owned end-to-end product design for AI-Powered B2B SaaS platforms, complex
+            dashboards, and eCommerce applications — from initial user research through shipped design
             systems and live implementations.
           </p>
 

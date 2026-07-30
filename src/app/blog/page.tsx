@@ -21,7 +21,22 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-async function getPosts() {
+interface SanityImage {
+  asset?: {
+    _ref?: string;
+  };
+}
+
+interface Post {
+  title?: string;
+  slug?: { current?: string };
+  excerpt?: string;
+  category?: string;
+  coverImage?: SanityImage;
+  publishedAt?: string;
+}
+
+async function getPosts(): Promise<Post[]> {
   return await client.fetch(
     `*[_type == "post"] | order(publishedAt desc) {
       title, slug, excerpt, category, coverImage, publishedAt
@@ -29,7 +44,7 @@ async function getPosts() {
   );
 }
 
-function urlFor(image: any) {
+function urlFor(image?: SanityImage) {
   if (!image?.asset?._ref) return null;
   const ref = image.asset._ref;
   const match = ref.match(/^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/);
@@ -61,13 +76,14 @@ export default async function BlogPage() {
             <article className="featured-post" style={{ display: 'flex', gap: '3rem', background: '#121212', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.08)', overflow: 'hidden', marginBottom: '4rem', alignItems: 'stretch' }}>
               {urlFor(featured.coverImage) && (
                 <div style={{ flex: '0 0 55%', position: 'relative' }}>
-                  <img src={urlFor(featured.coverImage)!} alt={featured.title} style={{ width: '100%', height: '100%', objectFit: 'cover', minHeight: '380px' }} />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={urlFor(featured.coverImage)!} alt={featured.title || 'Featured post'} style={{ width: '100%', height: '100%', objectFit: 'cover', minHeight: '380px' }} />
                 </div>
               )}
               <div style={{ flex: '1', padding: '3rem 3rem 3rem 0', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1.25rem' }}>
                   <span style={{ fontSize: '0.7rem', color: '#0a0a0a', background: '#e8c97a', padding: '0.35rem 0.85rem', borderRadius: '100px', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>{featured.category}</span>
-                  <span style={{ fontSize: '0.8rem', color: '#666' }}>{formatDate(featured.publishedAt)}</span>
+                  <span style={{ fontSize: '0.8rem', color: '#666' }}>{formatDate(featured.publishedAt || '')}</span>
                 </div>
                 <h2 style={{ fontSize: 'clamp(1.75rem, 3vw, 2.75rem)', fontWeight: 800, color: '#fff', lineHeight: 1.1, marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>{featured.title}</h2>
                 <p style={{ fontSize: '1.05rem', color: '#a0a0a0', lineHeight: 1.6, marginBottom: '2rem' }}>{featured.excerpt}</p>
@@ -78,19 +94,20 @@ export default async function BlogPage() {
         )}
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))', gap: '2.5rem' }}>
-          {rest.map((post: any, i: number) => (
+          {rest.map((post: Post, i: number) => (
             <Link key={i} href={`/blog/${post.slug?.current}`} style={{ textDecoration: 'none' }}>
               <article className="blog-card" style={{ background: '#121212', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.08)', overflow: 'hidden', height: '100%', transition: 'transform 0.3s ease, border-color 0.3s ease' }}>
                 {urlFor(post.coverImage) && (
                   <div style={{ overflow: 'hidden', height: '240px' }}>
-                    <img src={urlFor(post.coverImage)!} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={urlFor(post.coverImage)!} alt={post.title || 'Blog post'} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                 )}
                 <div style={{ padding: '1.75rem' }}>
                   <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'center', marginBottom: '1rem' }}>
                     <span style={{ fontSize: '0.68rem', color: '#e8c97a', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>{post.category}</span>
                     <span style={{ fontSize: '0.75rem', color: '#666' }}>·</span>
-                    <span style={{ fontSize: '0.75rem', color: '#666' }}>{formatDate(post.publishedAt)}</span>
+                    <span style={{ fontSize: '0.75rem', color: '#666' }}>{formatDate(post.publishedAt || '')}</span>
                   </div>
                   <h2 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#fff', margin: '0 0 0.85rem', lineHeight: 1.25, letterSpacing: '-0.01em' }}>{post.title}</h2>
                   <p style={{ fontSize: '0.95rem', color: '#a0a0a0', lineHeight: 1.55 }}>{post.excerpt}</p>

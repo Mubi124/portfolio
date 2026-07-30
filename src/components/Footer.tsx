@@ -43,7 +43,7 @@ export default function Footer() {
             letterSpacing: "0.02em",
           }}
         >
-          © 2026 · Senior UI/UX &amp; Product Designer · Lahore, Pakistan
+          © 2026 · UX/UI &amp; Product Designer · Lahore, Pakistan
         </p>
 
         {/* Right: social links */}

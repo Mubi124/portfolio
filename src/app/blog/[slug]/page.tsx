@@ -1,5 +1,5 @@
 import { client } from '@/sanity/lib/client';
-import { PortableText } from '@portabletext/react';
+import { PortableText, PortableTextComponents } from '@portabletext/react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -13,17 +13,23 @@ export async function generateStaticParams() {
   return slugs.map((s) => ({ slug: s.slug.current }));
 }
 
+interface SanityImage {
+  asset?: {
+    _ref?: string;
+  };
+}
+
 export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
   const { slug } = await params;
-  const post = await client.fetch<{ title: string; excerpt: string; coverImage?: any } | null>(
+  const post = await client.fetch<{ title: string; excerpt: string; coverImage?: SanityImage } | null>(
     `*[_type == "post" && slug.current == $slug][0]{ title, excerpt, coverImage }`,
     { slug }
   );
   if (!post) return {};
 
-  function urlFor(image: any) {
+  function urlFor(image?: SanityImage) {
     if (!image?.asset?._ref) return null;
     const ref = image.asset._ref;
     const match = ref.match(/^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/);
@@ -60,7 +66,7 @@ async function getPost(slug: string) {
   );
 }
 
-function urlFor(image: any) {
+function urlFor(image?: SanityImage) {
   if (!image?.asset?._ref) return null;
   const ref = image.asset._ref;
   const match = ref.match(/^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/);
@@ -73,23 +79,24 @@ function formatDate(date: string) {
   return new Date(date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
 
-const ptComponents = {
+const ptComponents: PortableTextComponents = {
   types: {
-    image: ({ value }: any) => {
+    image: ({ value }) => {
       const url = urlFor(value);
       if (!url) return null;
+      /* eslint-disable-next-line @next/next/no-img-element */
       return <img src={url} alt="" style={{ width: '100%', borderRadius: '12px', margin: '2.5rem 0' }} />;
     },
   },
   block: {
-    h2: ({ children }: any) => <h2 style={{ fontSize: '1.85rem', fontWeight: 800, color: '#fff', margin: '3rem 0 1.25rem', letterSpacing: '-0.02em' }}>{children}</h2>,
-    h3: ({ children }: any) => <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', margin: '2.5rem 0 1rem' }}>{children}</h3>,
-    normal: ({ children }: any) => <p style={{ fontSize: '1.1rem', color: '#c0c0c0', lineHeight: 1.85, margin: '0 0 1.5rem' }}>{children}</p>,
-    blockquote: ({ children }: any) => <blockquote style={{ borderLeft: '3px solid #e8c97a', paddingLeft: '1.5rem', margin: '2rem 0', fontStyle: 'italic', color: '#d8d8d8', fontSize: '1.2rem' }}>{children}</blockquote>,
+    h2: ({ children }) => <h2 style={{ fontSize: '1.85rem', fontWeight: 800, color: '#fff', margin: '3rem 0 1.25rem', letterSpacing: '-0.02em' }}>{children}</h2>,
+    h3: ({ children }) => <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', margin: '2.5rem 0 1rem' }}>{children}</h3>,
+    normal: ({ children }) => <p style={{ fontSize: '1.1rem', color: '#c0c0c0', lineHeight: 1.85, margin: '0 0 1.5rem' }}>{children}</p>,
+    blockquote: ({ children }) => <blockquote style={{ borderLeft: '3px solid #e8c97a', paddingLeft: '1.5rem', margin: '2rem 0', fontStyle: 'italic', color: '#d8d8d8', fontSize: '1.2rem' }}>{children}</blockquote>,
   },
   list: {
-    bullet: ({ children }: any) => <ul style={{ color: '#c0c0c0', fontSize: '1.1rem', lineHeight: 1.8, margin: '0 0 1.5rem', paddingLeft: '1.5rem' }}>{children}</ul>,
-    number: ({ children }: any) => <ol style={{ color: '#c0c0c0', fontSize: '1.1rem', lineHeight: 1.8, margin: '0 0 1.5rem', paddingLeft: '1.5rem' }}>{children}</ol>,
+    bullet: ({ children }) => <ul style={{ color: '#c0c0c0', fontSize: '1.1rem', lineHeight: 1.8, margin: '0 0 1.5rem', paddingLeft: '1.5rem' }}>{children}</ul>,
+    number: ({ children }) => <ol style={{ color: '#c0c0c0', fontSize: '1.1rem', lineHeight: 1.8, margin: '0 0 1.5rem', paddingLeft: '1.5rem' }}>{children}</ol>,
   },
 };
 
@@ -116,7 +123,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         )}
 
         {urlFor(post.coverImage) && (
-          <img src={urlFor(post.coverImage)!} alt={post.title} style={{ width: '100%', borderRadius: '20px', marginBottom: '3.5rem' }} />
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img src={urlFor(post.coverImage)!} alt={post.title || ''} style={{ width: '100%', borderRadius: '20px', marginBottom: '3.5rem' }} />
         )}
 
         <div>

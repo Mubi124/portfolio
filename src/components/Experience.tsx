@@ -3,12 +3,25 @@ import { useEffect, useRef } from "react";
 
 const experiences = [
   {
-    role: "Senior UI/UX & Product Designer",
+    role: "UI Designer (Freelance)",
+    company: "Independent",
+    location: "Remote",
+    duration: "Mar 2023 – Present",
+    type: "Freelance · Remote",
+    current: true,
+    points: [
+      "Delivered UX/UI for international clients across SaaS and AI",
+      "Created scalable interface systems",
+      "Used AI-assisted workflows for research and ideation",
+    ],
+  },
+  {
+    role: "User Interface Designer",
     company: "SparkAI",
     location: "Dubai, UAE",
     duration: "Feb 2025 – Mar 2026",
     type: "Full-time · Remote",
-    current: true,
+    current: false,
     points: [
       "Led end-to-end UI/UX for AI-powered SaaS products across web and mobile",
       "Built and governed a scalable Figma design system — improved handoff efficiency by 40%",
@@ -18,7 +31,20 @@ const experiences = [
     ],
   },
   {
-    role: "Senior UI/UX Designer",
+    role: "User Interface Designer (Contract)",
+    company: "Ethisol",
+    location: "Lahore, Pakistan (Remote)",
+    duration: "Dec 2025 – Feb 2026",
+    type: "Contract · Remote",
+    current: false,
+    points: [
+      "Translated SaaS requirements into user flows and high-fidelity interfaces",
+      "Defined responsive behaviors for engineering delivery",
+      "Used AI-assisted exploration for dashboard concepts",
+    ],
+  },
+  {
+    role: "UI/UX Designer",
     company: "Core Edge Solutions",
     location: "Lahore, Pakistan",
     duration: "Mar 2023 – Feb 2025",

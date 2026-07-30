@@ -48,6 +48,17 @@ const services = [
     description: "Data-heavy dashboards, admin interfaces, and B2B platforms — translating complex data and workflows into clean, scannable, decision-ready UI.",
     deliverables: ["Dashboard UI design", "Data visualization patterns", "Admin interface design", "B2B product flows"],
   },
+  {
+    num: "05",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
+      </svg>
+    ),
+    title: "Engineering Collaboration",
+    description: "Supporting developers with front-end ready concepts, HTML/CSS awareness, and design decisions grounded in technical feasibility.",
+    deliverables: ["Front-end ready concepts", "HTML/CSS awareness", "Developer handoff specs", "Technical feasibility reviews"],
+  },
 ];
 
 export default function Services() {
@@ -135,7 +146,7 @@ export default function Services() {
       {/* Cards grid */}
       <div style={{
         display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
+        gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
         gap: "1.5rem",
       }}>
         {services.map((service, i) => (

@@ -9,7 +9,7 @@ export async function GET() {
       }`
     );
     return NextResponse.json(projects);
-  } catch (error) {
+  } catch {
     return NextResponse.json([], { status: 500 });
   }
 }

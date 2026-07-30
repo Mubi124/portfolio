@@ -10,6 +10,7 @@ import Process        from "@/components/Process";
 import Services       from "@/components/Services";
 import Testimonials   from "@/components/Testimonials";
 import Experience     from "@/components/Experience";
+import Education      from "@/components/Education";
 import FAQ            from "@/components/FAQ";
 import Contact        from "@/components/Contact";
 import Footer         from "@/components/Footer";
@@ -63,6 +64,7 @@ export default function Home() {
         <Testimonials />
         <Experience />
         <FAQ />
+        <Education />
         <Contact />
       </main>
       <Footer />

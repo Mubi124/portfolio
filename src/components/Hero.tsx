@@ -55,7 +55,7 @@ export default function Hero() {
         maxWidth: "900px",
         marginBottom: "1.5rem",
       }}>
-        Senior UI/UX <br />
+        UX/UI <br />
         <span style={{ color: "var(--color-accent)" }}>& Product Designer</span>
       </h1>
 
@@ -67,7 +67,7 @@ export default function Hero() {
         maxWidth: "600px",
         marginBottom: "3rem",
       }}>
-        Crafting high-fidelity interfaces and scalable design systems for forward-thinking tech companies. I design from evidence, not assumptions.
+        Crafting high-fidelity interfaces and scalable design systems for AI-Powered B2B SaaS and forward-thinking tech companies. I design from evidence, not assumptions.
       </p>
 
       {/* Call to Action Buttons */}

@@ -17,17 +17,15 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-const DOMAIN = "https://mubashirali.design";
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.mubashiralidesign.com"),
   title: {
-    default: "Mubashir Ali | Senior UI/UX & Product Designer — SaaS, B2B, eCommerce",
-    template: "%s | Mubashir Ali — UI/UX Designer",
+    default: "Mubashir Ali | UX/UI & Product Designer — AI-Powered B2B SaaS",
+    template: "%s | Mubashir Ali — UX/UI & Product Designer",
   },
-  description: "Senior UI/UX & Product Designer with 5+ years experience designing scalable SaaS, B2B, and eCommerce products. Specialist in Figma, design systems, and high-fidelity prototypes. Available for remote work globally.",
+  description: "UX/UI & Product Designer with 5+ years experience designing scalable AI-Powered B2B SaaS, dashboards, and eCommerce products. Specialist in Figma, design systems, and high-fidelity prototypes.",
   keywords: [
-    "UI/UX Designer", "Product Designer", "SaaS Designer", "B2B Dashboard Design",
+    "UX/UI Designer", "Product Designer", "AI-Powered B2B SaaS", "SaaS Designer", "B2B Dashboard Design",
     "Figma Expert", "Design Systems", "eCommerce UX", "Mobile App Designer",
     "Remote UI Designer", "Lahore Designer", "Senior UX Designer",
     "Webflow Designer", "Framer Designer", "User Research", "Usability Testing",
@@ -46,22 +44,22 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://www.mubashiralidesign.com",
-    siteName: "Mubashir Ali — Senior UI/UX & Product Designer",
+    siteName: "Mubashir Ali — UX/UI & Product Designer",
     locale: "en_US",
-    title: "Mubashir Ali | Senior UI/UX & Product Designer — SaaS, B2B, eCommerce",
-    description: "5+ years designing scalable SaaS, B2B, and eCommerce products. Figma expert. Design systems specialist. Available for remote work.",
+    title: "Mubashir Ali | UX/UI & Product Designer — AI-Powered B2B SaaS",
+    description: "5+ years designing scalable AI-Powered B2B SaaS, dashboards, and eCommerce products. Figma expert. Design systems specialist. Available for remote work.",
     images: [{
       url: "https://www.mubashiralidesign.com/og-image.jpg",
       width: 1200,
       height: 630,
-      alt: "Mubashir Ali — Senior UI/UX & Product Designer Portfolio",
+      alt: "Mubashir Ali — UX/UI & Product Designer Portfolio",
     }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mubashir Ali | Senior UI/UX & Product Designer",
-    description: "5+ years designing SaaS, B2B & eCommerce products. Figma expert. Remote designer.",
-    images: [{ url: "https://www.mubashiralidesign.com/og-image.jpg", alt: "Mubashir Ali UI/UX Designer" }],
+    title: "Mubashir Ali | UX/UI & Product Designer",
+    description: "5+ years designing AI-Powered B2B SaaS & eCommerce products. Figma expert. Remote designer.",
+    images: [{ url: "https://www.mubashiralidesign.com/og-image.jpg", alt: "Mubashir Ali UX/UI Designer" }],
   },
   icons: { icon: "/favicon.ico" },
   other: { "theme-color": "#0a0a0a" },
@@ -76,8 +74,8 @@ const personSchema = {
       name: "Mubashir Ali",
       givenName: "Mubashir",
       familyName: "Ali",
-      jobTitle: "Senior UI/UX & Product Designer",
-      description: "Senior UI/UX & Product Designer with 5+ years of experience designing scalable SaaS, B2B, and eCommerce products for startups and growing companies. Specialist in Figma, design systems, and high-fidelity prototypes.",
+      jobTitle: "UX/UI & Product Designer",
+      description: "UX/UI & Product Designer with 5+ years of experience designing scalable AI-Powered B2B SaaS, dashboards, and digital products.",
       url: "https://www.mubashiralidesign.com",
       email: "mubashirjaffari@gmail.com",
       telephone: "+923121844917",
