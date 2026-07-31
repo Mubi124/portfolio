@@ -56,7 +56,7 @@ export default function Hero() {
         marginBottom: "1.5rem",
       }}>
         UX/UI <br />
-        <span style={{ color: "var(--color-accent)" }}>& Product Designer</span>
+        <span style={{ color: "var(--color-accent)" }}>& Product Engineer</span>
       </h1>
 
       {/* Sub-paragraph - Increased size and legibility */}
