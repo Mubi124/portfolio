@@ -1,5 +1,6 @@
 import { client } from '@/sanity/lib/client';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -76,8 +77,14 @@ export default async function BlogPage() {
             <article className="featured-post" style={{ display: 'flex', gap: '3rem', background: '#121212', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.08)', overflow: 'hidden', marginBottom: '4rem', alignItems: 'stretch' }}>
               {urlFor(featured.coverImage) && (
                 <div style={{ flex: '0 0 55%', position: 'relative' }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={urlFor(featured.coverImage)!} alt={featured.title || 'Featured post'} style={{ width: '100%', height: '100%', objectFit: 'cover', minHeight: '380px' }} />
+                  <Image
+                    src={urlFor(featured.coverImage)!}
+                    alt={featured.title || 'Featured post cover image'}
+                    width={1200}
+                    height={675}
+                    priority
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', minHeight: '380px' }}
+                  />
                 </div>
               )}
               <div style={{ flex: '1', padding: '3rem 3rem 3rem 0', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -99,8 +106,13 @@ export default async function BlogPage() {
               <article className="blog-card" style={{ background: '#121212', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.08)', overflow: 'hidden', height: '100%', transition: 'transform 0.3s ease, border-color 0.3s ease' }}>
                 {urlFor(post.coverImage) && (
                   <div style={{ overflow: 'hidden', height: '240px' }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={urlFor(post.coverImage)!} alt={post.title || 'Blog post'} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <Image
+                      src={urlFor(post.coverImage)!}
+                      alt={post.title || 'Blog post cover image'}
+                      width={600}
+                      height={400}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
                   </div>
                 )}
                 <div style={{ padding: '1.75rem' }}>

@@ -1,8 +1,12 @@
 import { client } from '@/sanity/lib/client';
-import { PortableText, PortableTextComponents } from '@portabletext/react';
+import type { PortableTextComponents } from '@portabletext/react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
+
+const PortableText = dynamic(() => import('@portabletext/react').then((mod) => mod.PortableText));
 
 export const revalidate = 60;
 
@@ -84,8 +88,15 @@ const ptComponents: PortableTextComponents = {
     image: ({ value }) => {
       const url = urlFor(value);
       if (!url) return null;
-      /* eslint-disable-next-line @next/next/no-img-element */
-      return <img src={url} alt="" style={{ width: '100%', borderRadius: '12px', margin: '2.5rem 0' }} />;
+      return (
+        <Image
+          src={url}
+          alt={value?.alt || 'Article inline image'}
+          width={800}
+          height={500}
+          style={{ width: '100%', height: 'auto', borderRadius: '12px', margin: '2.5rem 0' }}
+        />
+      );
     },
   },
   block: {
@@ -123,8 +134,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         )}
 
         {urlFor(post.coverImage) && (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img src={urlFor(post.coverImage)!} alt={post.title || ''} style={{ width: '100%', borderRadius: '20px', marginBottom: '3.5rem' }} />
+          <Image
+            src={urlFor(post.coverImage)!}
+            alt={post.title || 'Blog post cover image'}
+            width={1200}
+            height={675}
+            priority
+            style={{ width: '100%', height: 'auto', borderRadius: '20px', marginBottom: '3.5rem' }}
+          />
         )}
 
         <div>
