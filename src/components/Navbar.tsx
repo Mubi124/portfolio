@@ -2,12 +2,12 @@
 import { useState, useEffect } from "react";
 
 const navLinks = [
-  { name: "Work",       href: "#projects"   },
-  { name: "Process",    href: "#process"    },
-  { name: "Services",   href: "#services"   },
-  { name: "Experience", href: "#experience" },
-  { name: "FAQ",        href: "#faq"        },
-  { name: "Blog",       href: "/blog"       },
+  { name: "Work",       href: "/#projects"   },
+  { name: "Process",    href: "/#process"    },
+  { name: "Services",   href: "/#services"   },
+  { name: "Experience", href: "/#experience" },
+  { name: "FAQ",        href: "/#faq"        },
+  { name: "Blog",       href: "/blog"        },
 ];
 
 export default function Navbar() {
@@ -15,23 +15,23 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 80);
+    const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navStyle: React.CSSProperties = {
-    position: "fixed",
+    position: "sticky",
     top: 0,
     left: 0,
     right: 0,
     zIndex: 100,
     padding: "1.1rem 3rem",
     transition: "background 0.3s, border-color 0.3s, backdrop-filter 0.3s",
-    background: scrolled ? "rgba(10,10,10,0.85)" : "transparent",
-    backdropFilter: scrolled ? "blur(14px)" : "none",
-    WebkitBackdropFilter: scrolled ? "blur(14px)" : "none",
-    borderBottom: scrolled ? "1px solid var(--color-border)" : "1px solid transparent",
+    background: scrolled ? "rgba(10, 10, 10, 0.85)" : "rgba(10, 10, 10, 0.65)",
+    backdropFilter: "blur(14px)",
+    WebkitBackdropFilter: "blur(14px)",
+    borderBottom: scrolled ? "1px solid var(--color-border)" : "1px solid rgba(255, 255, 255, 0.08)",
   };
 
   const linkStyle: React.CSSProperties = {
@@ -55,8 +55,14 @@ export default function Navbar() {
         }}
       >
         {/* Logo */}
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        <a
+          href="/"
+          onClick={(e) => {
+            if (typeof window !== "undefined" && window.location.pathname === "/") {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: 800,
@@ -71,7 +77,7 @@ export default function Navbar() {
           }}
         >
           Mubashir
-        </button>
+        </a>
 
         {/* Desktop nav links */}
         <div
@@ -98,7 +104,7 @@ export default function Navbar() {
         {/* CTA */}
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
           <a
-            href="#contact"
+            href="/#contact"
             style={{
               background: "var(--color-accent)",
               color: "#0a0a0a",

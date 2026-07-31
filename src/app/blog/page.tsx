@@ -64,7 +64,7 @@ export default async function BlogPage() {
   const rest = posts.slice(1);
 
   return (
-    <main style={{ background: '#0a0a0a', minHeight: '100vh', padding: '8rem 2rem 6rem' }}>
+    <main style={{ background: '#0a0a0a', minHeight: '100vh', padding: '3.5rem 2rem 6rem' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
         {/* Back to Home */}

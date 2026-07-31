@@ -118,7 +118,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   if (!post) notFound();
 
   return (
-    <main style={{ background: '#0a0a0a', minHeight: '100vh', padding: '7rem 2rem 6rem' }}>
+    <main style={{ background: '#0a0a0a', minHeight: '100vh', padding: '3.5rem 2rem 6rem' }}>
       <article style={{ maxWidth: '760px', margin: '0 auto' }}>
 
         {/* Navigation row */}
