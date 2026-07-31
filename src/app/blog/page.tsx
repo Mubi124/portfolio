@@ -66,7 +66,35 @@ export default async function BlogPage() {
   return (
     <main style={{ background: '#0a0a0a', minHeight: '100vh', padding: '8rem 2rem 6rem' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+
+        {/* Back to Home */}
+        <Link
+          href="/"
+          className="blog-back-btn"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.45rem',
+            color: '#b3b3b3',
+            textDecoration: 'none',
+            fontSize: '0.875rem',
+            fontFamily: 'var(--font-body)',
+            fontWeight: 500,
+            letterSpacing: '0.01em',
+            marginBottom: '3rem',
+            padding: '0.5rem 1rem',
+            borderRadius: '100px',
+            border: '1px solid rgba(255,255,255,0.08)',
+            background: 'rgba(255,255,255,0.03)',
+            transition: 'color 0.2s, border-color 0.2s, background 0.2s',
+          }}
+        >
+          <span aria-hidden="true" style={{ fontSize: '1rem', lineHeight: 1 }}>←</span>
+          Back to Home
+        </Link>
+
         <div style={{ marginBottom: '5rem' }}>
+
           <p style={{ fontSize: '0.75rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: '#e8c97a', marginBottom: '1rem', fontWeight: 700 }}>The Blog</p>
           <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 900, color: '#fff', letterSpacing: '-0.04em', lineHeight: 1 }}>Design Notes & Insights</h1>
           <p style={{ color: '#888', fontSize: '1.1rem', marginTop: '1.5rem', maxWidth: '560px' }}>Thoughts on UI/UX, product design, motion, and the craft of building digital experiences.</p>
@@ -138,6 +166,7 @@ export default async function BlogPage() {
 
       <style>{`
         .blog-card:hover { transform: translateY(-6px); border-color: rgba(232,201,122,0.3) !important; }
+        .blog-back-btn:hover { color: #e8c97a !important; border-color: rgba(232,201,122,0.35) !important; background: rgba(232,201,122,0.06) !important; }
         @media (max-width: 900px) {
           .featured-post { flex-direction: column !important; gap: 0 !important; }
           .featured-post > div:first-child { flex: none !important; }

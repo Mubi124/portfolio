@@ -45,8 +45,13 @@ body {
   font-size: 16px;
   line-height: 1.6;
   overflow-x: hidden;
-  cursor: none;
+  cursor: auto;
 }
+
+/* Only hide the default cursor on pages that mount the CustomCursor component */
+body.has-custom-cursor { cursor: none; }
+body.has-custom-cursor a,
+body.has-custom-cursor button { cursor: none; }
 
 h1, h2, h3, h4, h5, h6 {
   color: var(--color-text-primary);
@@ -211,9 +216,10 @@ body[data-cursor-hover="true"] .cursor-ring { opacity: 0; }
   font-size: 0.9rem;
   text-decoration: none;
   border: none;
-  cursor: none;
+  cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
 }
+body.has-custom-cursor .btn-primary { cursor: none; }
 .btn-primary:hover {
   background: var(--color-accent-hover);
   transform: translateY(-2px);
@@ -230,9 +236,10 @@ body[data-cursor-hover="true"] .cursor-ring { opacity: 0; }
   border: 1px solid var(--color-border);
   font-size: 0.9rem;
   text-decoration: none;
-  cursor: none;
+  cursor: pointer;
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
+body.has-custom-cursor .btn-outline { cursor: none; }
 .btn-outline:hover {
   border-color: var(--color-accent);
   transform: translateY(-2px);

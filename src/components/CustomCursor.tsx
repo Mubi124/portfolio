@@ -13,6 +13,9 @@ export default function CustomCursor() {
     // Skip on touch devices
     if (window.matchMedia("(hover: none)").matches) return;
 
+    // Signal to CSS that the custom cursor is active on this page
+    document.body.classList.add("has-custom-cursor");
+
     const onMove = (e: MouseEvent) => {
       mouse.current = { x: e.clientX, y: e.clientY };
       if (dotRef.current) {
@@ -52,6 +55,7 @@ export default function CustomCursor() {
     document.addEventListener("mouseout",   handleLeave);
 
     return () => {
+      document.body.classList.remove("has-custom-cursor");
       document.removeEventListener("mousemove",  onMove);
       document.removeEventListener("mouseover",  handleEnter);
       document.removeEventListener("mouseout",   handleLeave);
