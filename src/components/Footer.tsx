@@ -50,6 +50,7 @@ export default function Footer() {
         <div className="footer-socials" style={{ display: "flex", gap: "1.5rem" }}>
           {[
             { label: "LinkedIn", href: "https://www.linkedin.com/in/mubashir-ali-design/" },
+            { label: "Behance", href: "https://www.behance.net/mubashirali512" },
             { label: "Figma", href: "https://www.figma.com/design/wVKfD2BtFeiXymCvYZOWno/Portfolio" },
             { label: "Blog", href: "/blog" },
             { label: "Email", href: "mailto:mubashirjaffari@gmail.com" },
