@@ -65,7 +65,7 @@ export default function Contact() {
             </p>
 
             {/* Contact info */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem", marginBottom: "2.5rem" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem" }}>
               {[
                 { icon: "✉", label: "mubashirjaffari@gmail.com", href: "mailto:mubashirjaffari@gmail.com" },
                 { icon: "📱", label: "+92 312 1844917", href: "tel:+923121844917" },
@@ -89,25 +89,6 @@ export default function Contact() {
                     {item.label}
                   </div>
                 )
-              ))}
-            </div>
-
-            {/* Social links */}
-            <div style={{ display: "flex", gap: "0.75rem" }}>
-              {[
-                { label: "LinkedIn", href: "https://www.linkedin.com/in/mubashir-ali-design/" },
-                { label: "Figma Portfolio", href: "https://www.figma.com/design/wVKfD2BtFeiXymCvYZOWno/Portfolio" },
-              ].map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-outline"
-                  style={{ fontSize: "0.8rem", padding: "0.6rem 1.2rem" }}
-                >
-                  {s.label} ↗
-                </a>
               ))}
             </div>
           </div>
