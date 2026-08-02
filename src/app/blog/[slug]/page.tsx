@@ -118,58 +118,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   if (!post) notFound();
 
   return (
-    <main style={{ background: '#0a0a0a', minHeight: '100vh', padding: '3.5rem 2rem 6rem' }}>
+    <main style={{ background: '#0a0a0a', minHeight: '100vh', padding: '4rem 2rem 6rem' }}>
       <article style={{ maxWidth: '760px', margin: '0 auto' }}>
-
-        {/* Navigation row */}
-        <nav aria-label="Page navigation" style={{ display: 'flex', gap: '0.75rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
-          <Link
-            href="/"
-            className="blog-back-btn"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.45rem',
-              color: '#b3b3b3',
-              textDecoration: 'none',
-              fontSize: '0.875rem',
-              fontFamily: 'var(--font-body)',
-              fontWeight: 500,
-              letterSpacing: '0.01em',
-              padding: '0.5rem 1rem',
-              borderRadius: '100px',
-              border: '1px solid rgba(255,255,255,0.08)',
-              background: 'rgba(255,255,255,0.03)',
-              transition: 'color 0.2s, border-color 0.2s, background 0.2s',
-            }}
-          >
-            <span aria-hidden="true" style={{ fontSize: '1rem', lineHeight: 1 }}>←</span>
-            Home
-          </Link>
-          <Link
-            href="/blog"
-            className="blog-back-btn"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.45rem',
-              color: '#b3b3b3',
-              textDecoration: 'none',
-              fontSize: '0.875rem',
-              fontFamily: 'var(--font-body)',
-              fontWeight: 500,
-              letterSpacing: '0.01em',
-              padding: '0.5rem 1rem',
-              borderRadius: '100px',
-              border: '1px solid rgba(255,255,255,0.08)',
-              background: 'rgba(255,255,255,0.03)',
-              transition: 'color 0.2s, border-color 0.2s, background 0.2s',
-            }}
-          >
-            <span aria-hidden="true" style={{ fontSize: '1rem', lineHeight: 1 }}>←</span>
-            Blog
-          </Link>
-        </nav>
 
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1.5rem' }}>
           <span style={{ fontSize: '0.72rem', color: '#0a0a0a', background: '#e8c97a', padding: '0.4rem 0.9rem', borderRadius: '100px', textTransform: 'uppercase', letterSpacing: '0.07em', fontWeight: 800 }}>{post.category}</span>

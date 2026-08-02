@@ -64,34 +64,8 @@ export default async function BlogPage() {
   const rest = posts.slice(1);
 
   return (
-    <main style={{ background: '#0a0a0a', minHeight: '100vh', padding: '3.5rem 2rem 6rem' }}>
+    <main style={{ background: '#0a0a0a', minHeight: '100vh', padding: '4rem 2rem 6rem' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-
-        {/* Back to Home */}
-        <Link
-          href="/"
-          className="blog-back-btn"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.45rem',
-            color: '#b3b3b3',
-            textDecoration: 'none',
-            fontSize: '0.875rem',
-            fontFamily: 'var(--font-body)',
-            fontWeight: 500,
-            letterSpacing: '0.01em',
-            marginBottom: '3rem',
-            padding: '0.5rem 1rem',
-            borderRadius: '100px',
-            border: '1px solid rgba(255,255,255,0.08)',
-            background: 'rgba(255,255,255,0.03)',
-            transition: 'color 0.2s, border-color 0.2s, background 0.2s',
-          }}
-        >
-          <span aria-hidden="true" style={{ fontSize: '1rem', lineHeight: 1 }}>←</span>
-          Back to Home
-        </Link>
 
         <div style={{ marginBottom: '5rem' }}>
           <p style={{ fontSize: '0.75rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: '#e8c97a', marginBottom: '1rem', fontWeight: 700 }}>The Blog</p>
