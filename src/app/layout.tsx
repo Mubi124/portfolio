@@ -61,7 +61,6 @@ export const metadata: Metadata = {
     description: "5+ years designing AI-Powered B2B SaaS & eCommerce products. Figma expert. Remote designer.",
     images: [{ url: "https://www.mubashiralidesign.com/og-image.jpg", alt: "Mubashir Ali UX/UI Designer" }],
   },
-  icons: { icon: "/favicon.ico" },
   other: { "theme-color": "#0a0a0a" },
 };
 
