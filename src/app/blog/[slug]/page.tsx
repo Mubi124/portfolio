@@ -1,12 +1,10 @@
 import { client } from '@/sanity/lib/client';
-import type { PortableTextComponents } from '@portabletext/react';
+import { urlFor } from '@/sanity/lib/image';
+import CustomPortableText from '@/components/CustomPortableText';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
-
-const PortableText = dynamic(() => import('@portabletext/react').then((mod) => mod.PortableText));
 
 export const revalidate = 60;
 
@@ -20,43 +18,79 @@ export async function generateStaticParams() {
 interface SanityImage {
   asset?: {
     _ref?: string;
+    _type?: string;
   };
+  [key: string]: unknown;
+}
+
+function getImageUrl(image?: SanityImage | null): string | null {
+  if (!image?.asset) return null;
+  try {
+    return urlFor(image).width(1200).auto('format').url();
+  } catch {
+    return null;
+  }
 }
 
 export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
   const { slug } = await params;
-  const post = await client.fetch<{ title: string; excerpt: string; coverImage?: SanityImage } | null>(
-    `*[_type == "post" && slug.current == $slug][0]{ title, excerpt, coverImage }`,
+  const post = await client.fetch<{
+    title?: string;
+    excerpt?: string;
+    coverImage?: SanityImage;
+    publishedAt?: string;
+  } | null>(
+    `*[_type == "post" && slug.current == $slug][0]{ title, excerpt, coverImage, publishedAt }`,
     { slug }
   );
-  if (!post) return {};
 
-  function urlFor(image?: SanityImage) {
-    if (!image?.asset?._ref) return null;
-    const ref = image.asset._ref;
-    const match = ref.match(/^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/);
-    if (!match) return null;
-    return `https://cdn.sanity.io/images/6272nx4u/production/${match[1]}-${match[2]}.${match[3]}`;
+  const fallbackTitle = "Blog Post | Mubashir Ali — UX/UI & Product Designer";
+  const fallbackDescription = "Read the latest design notes and insights by Mubashir Ali.";
+  const fallbackOgImage = "https://www.mubashiralidesign.com/og-image.jpg";
+  const canonicalUrl = `https://www.mubashiralidesign.com/blog/${slug}`;
+
+  if (!post) {
+    return {
+      title: fallbackTitle,
+      description: fallbackDescription,
+      alternates: { canonical: canonicalUrl },
+    };
   }
 
-  const ogImage = urlFor(post.coverImage) ?? 'https://www.mubashiralidesign.com/og-image.jpg';
+  const title = post.title ? `${post.title} | Mubashir Ali` : fallbackTitle;
+  const description = post.excerpt?.trim() ? post.excerpt : fallbackDescription;
+  const coverUrl = getImageUrl(post.coverImage);
+  const ogImageUrl = coverUrl ?? fallbackOgImage;
+  const publishedTime = post.publishedAt ?? undefined;
 
   return {
-    title: post.title,
-    description: post.excerpt ?? '',
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
-      title: post.title,
-      description: post.excerpt ?? '',
-      images: [{ url: ogImage }],
-      type: 'article',
+      title: post.title ?? fallbackTitle,
+      description,
+      url: canonicalUrl,
+      siteName: "Mubashir Ali — UX/UI & Product Designer",
+      locale: "en_US",
+      type: "article",
+      publishedTime,
+      images: [
+        {
+          url: ogImageUrl,
+          alt: post.title ?? "Blog post cover image",
+        },
+      ],
     },
     twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: post.excerpt ?? '',
-      images: [ogImage],
+      card: "summary_large_image",
+      title: post.title ?? fallbackTitle,
+      description,
+      images: [ogImageUrl],
     },
   };
 }
@@ -70,46 +104,10 @@ async function getPost(slug: string) {
   );
 }
 
-function urlFor(image?: SanityImage) {
-  if (!image?.asset?._ref) return null;
-  const ref = image.asset._ref;
-  const match = ref.match(/^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/);
-  if (!match) return null;
-  return `https://cdn.sanity.io/images/6272nx4u/production/${match[1]}-${match[2]}.${match[3]}`;
-}
-
 function formatDate(date: string) {
   if (!date) return '';
   return new Date(date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
-
-const ptComponents: PortableTextComponents = {
-  types: {
-    image: ({ value }) => {
-      const url = urlFor(value);
-      if (!url) return null;
-      return (
-        <Image
-          src={url}
-          alt={value?.alt || 'Article inline image'}
-          width={800}
-          height={500}
-          style={{ width: '100%', height: 'auto', borderRadius: '12px', margin: '2.5rem 0' }}
-        />
-      );
-    },
-  },
-  block: {
-    h2: ({ children }) => <h2 style={{ fontSize: '1.85rem', fontWeight: 800, color: '#fff', margin: '3rem 0 1.25rem', letterSpacing: '-0.02em' }}>{children}</h2>,
-    h3: ({ children }) => <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', margin: '2.5rem 0 1rem' }}>{children}</h3>,
-    normal: ({ children }) => <p style={{ fontSize: '1.1rem', color: '#c0c0c0', lineHeight: 1.85, margin: '0 0 1.5rem' }}>{children}</p>,
-    blockquote: ({ children }) => <blockquote style={{ borderLeft: '3px solid #e8c97a', paddingLeft: '1.5rem', margin: '2rem 0', fontStyle: 'italic', color: '#d8d8d8', fontSize: '1.2rem' }}>{children}</blockquote>,
-  },
-  list: {
-    bullet: ({ children }) => <ul style={{ color: '#c0c0c0', fontSize: '1.1rem', lineHeight: 1.8, margin: '0 0 1.5rem', paddingLeft: '1.5rem' }}>{children}</ul>,
-    number: ({ children }) => <ol style={{ color: '#c0c0c0', fontSize: '1.1rem', lineHeight: 1.8, margin: '0 0 1.5rem', paddingLeft: '1.5rem' }}>{children}</ol>,
-  },
-};
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -117,8 +115,43 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   if (!post) notFound();
 
+  const postUrl = `https://www.mubashiralidesign.com/blog/${slug}`;
+  const coverUrl = getImageUrl(post.coverImage);
+  const imageUrl = coverUrl ?? 'https://www.mubashiralidesign.com/og-image.jpg';
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title || 'Blog Post',
+    description: post.excerpt || '',
+    image: [imageUrl],
+    datePublished: post.publishedAt || undefined,
+    author: {
+      '@type': 'Person',
+      name: 'Mubashir Ali',
+      url: 'https://www.mubashiralidesign.com',
+    },
+    publisher: {
+      '@type': 'Person',
+      name: 'Mubashir Ali',
+      url: 'https://www.mubashiralidesign.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.mubashiralidesign.com/og-image.jpg',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': postUrl,
+    },
+  };
+
   return (
     <main style={{ background: '#0a0a0a', minHeight: '100vh', padding: '4rem 2rem 6rem' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <article style={{ maxWidth: '760px', margin: '0 auto' }}>
 
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1.5rem' }}>
@@ -132,9 +165,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <p style={{ fontSize: '1.3rem', color: '#999', lineHeight: 1.5, marginBottom: '3rem' }}>{post.excerpt}</p>
         )}
 
-        {urlFor(post.coverImage) && (
+        {coverUrl && (
           <Image
-            src={urlFor(post.coverImage)!}
+            src={coverUrl}
             alt={post.title || 'Blog post cover image'}
             width={1200}
             height={675}
@@ -144,7 +177,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         )}
 
         <div>
-          <PortableText value={post.body} components={ptComponents} />
+          <CustomPortableText value={post.body} />
         </div>
 
         {/* Behance CTA Card */}
@@ -191,3 +224,4 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     </main>
   );
 }
+
