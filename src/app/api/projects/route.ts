@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const projects = await client.fetch(
       `*[_type == "project"] | order(order asc) {
-        title, description, tags, image, caseStudyUrl, slug
+        title, description, tags, image, caseStudyUrl, slug, techStack, challenges, githubUrl, liveUrl
       }`
     );
     return NextResponse.json(projects);
@@ -13,3 +13,4 @@ export async function GET() {
     return NextResponse.json([], { status: 500 });
   }
 }
+

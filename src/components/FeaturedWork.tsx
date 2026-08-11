@@ -22,23 +22,24 @@ const defaultProjects: Project[] = [
     description: "AI-powered recruiting platform featuring specialized recruiter dashboards, intelligent AI-assisted workflows, and permission-aware views designed for enterprise hiring teams.",
     tags: ["Recruiter Dashboards", "AI Workflows", "Permission-Aware Views", "Enterprise SaaS"],
     imageUrl: "/images/projects/contrario.jpg",
-    caseStudyUrl: "#",
+    caseStudyUrl: "/projects/contrario-ai-recruiting-platform",
   },
   {
     title: "LeadPilot AI Lead Intelligence CRM",
     description: "Next-generation lead intelligence CRM incorporating automated AI lead scoring, dynamic outreach generation, and streamlined pipeline management.",
     tags: ["AI Lead Scoring", "Outreach Generation", "Pipeline Management", "Sales CRM"],
     imageUrl: "/images/projects/spark.jpg",
-    caseStudyUrl: "#",
+    caseStudyUrl: "/projects/leadpilot-ai-crm",
   },
   {
     title: "NavSphere - Travel Operations Dashboard",
     description: "High-density travel operations control center featuring data-rich B2B dashboards, multi-parameter filtering, and real-time decision-support interfaces.",
     tags: ["Data-Rich B2B Dashboards", "Advanced Filtering", "Decision Support", "Travel Ops"],
     imageUrl: "/images/projects/nexuses.jpg",
-    caseStudyUrl: "#",
+    caseStudyUrl: "/projects/navsphere-travel-ops",
   },
 ];
+
 
 export default function FeaturedWork() {
   const [projects, setProjects] = useState<Project[]>(defaultProjects);

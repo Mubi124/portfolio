@@ -8,6 +8,12 @@ export const getProjectsQuery = groq`
     description,
     tags,
     "mainImage": mainImage.asset->url,
+    caseStudyUrl,
+    techStack,
+    challenges,
+    githubUrl,
+    liveUrl,
     order
   }
 `;
+

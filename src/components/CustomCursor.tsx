@@ -2,71 +2,45 @@
 import { useEffect, useRef } from "react";
 
 export default function CustomCursor() {
-  const dotRef  = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
-  const mouse   = useRef({ x: -100, y: -100 });
-  const ring    = useRef({ x: -100, y: -100 });
-  const rafId   = useRef<number>(0);
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const pos       = useRef({ x: -100, y: -100 });
+  const rafId     = useRef<number>(0);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    // Skip on touch devices
+    // Don't mount on touch-only devices
     if (window.matchMedia("(hover: none)").matches) return;
 
-    // Signal to CSS that the custom cursor is active on this page
+    // Hide the native cursor globally
     document.body.classList.add("has-custom-cursor");
 
     const onMove = (e: MouseEvent) => {
-      mouse.current = { x: e.clientX, y: e.clientY };
-      if (dotRef.current) {
-        dotRef.current.style.left = e.clientX + "px";
-        dotRef.current.style.top  = e.clientY + "px";
-      }
+      pos.current = { x: e.clientX, y: e.clientY };
     };
 
-    const animate = () => {
-      ring.current.x += (mouse.current.x - ring.current.x) * 0.12;
-      ring.current.y += (mouse.current.y - ring.current.y) * 0.12;
-      if (ringRef.current) {
-        ringRef.current.style.left = ring.current.x + "px";
-        ringRef.current.style.top  = ring.current.y + "px";
+    const loop = () => {
+      if (cursorRef.current) {
+        cursorRef.current.style.transform =
+          `translate(${pos.current.x}px, ${pos.current.y}px)`;
       }
-      rafId.current = requestAnimationFrame(animate);
+      rafId.current = requestAnimationFrame(loop);
     };
 
-    document.addEventListener("mousemove", onMove);
-    rafId.current = requestAnimationFrame(animate);
-
-    // Hover detection via event delegation
-    const handleEnter = (e: MouseEvent) => {
-      const el = e.target as Element;
-      if (el.closest("a, button")) {
-        document.body.setAttribute("data-cursor-hover", "true");
-      }
-    };
-    const handleLeave = (e: MouseEvent) => {
-      const el = e.target as Element;
-      if (el.closest("a, button")) {
-        document.body.removeAttribute("data-cursor-hover");
-      }
-    };
-
-    document.addEventListener("mouseover",  handleEnter);
-    document.addEventListener("mouseout",   handleLeave);
+    document.addEventListener("mousemove", onMove, { passive: true });
+    rafId.current = requestAnimationFrame(loop);
 
     return () => {
       document.body.classList.remove("has-custom-cursor");
-      document.removeEventListener("mousemove",  onMove);
-      document.removeEventListener("mouseover",  handleEnter);
-      document.removeEventListener("mouseout",   handleLeave);
+      document.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(rafId.current);
     };
   }, []);
 
   return (
-    <>
-      <div ref={dotRef}  className="cursor-dot"  aria-hidden="true" />
-      <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
-    </>
+    <div
+      ref={cursorRef}
+      className="cursor-blend"
+      aria-hidden="true"
+    />
   );
 }
