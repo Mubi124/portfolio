@@ -1,6 +1,5 @@
 "use client";
 import { useEffect } from "react";
-import CustomCursor   from "@/components/CustomCursor";
 import Navbar         from "@/components/Navbar";
 import Hero           from "@/components/Hero";
 import Marquee        from "@/components/Marquee";
@@ -51,7 +50,6 @@ export default function Home() {
   return (
     <>
       <div id="scroll-progress" aria-hidden="true" />
-      <CustomCursor />
       <Navbar />
       <main>
         <Hero />

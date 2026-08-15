@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Syne, DM_Sans } from "next/font/google";
 import Script from "next/script";
+import CustomCursor from "@/components/CustomCursor";
 import "./globals.css";
 
 const syne = Syne({
@@ -155,7 +156,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
       </head>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <CustomCursor />
+        {children}
+      </body>
     </html>
   );
 }
