@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Navbar         from "@/components/Navbar";
 import Hero           from "@/components/Hero";
 import Marquee        from "@/components/Marquee";
+import ServicePillars from "@/components/ServicePillars";
 import FeaturedWork   from "@/components/FeaturedWork";
 import About          from "@/components/About";
 import Process        from "@/components/Process";
@@ -15,9 +16,9 @@ import Contact        from "@/components/Contact";
 import Footer         from "@/components/Footer";
 
 const marqueeItems1 = [
-  "UI/UX Design", "Product Design", "SaaS", "B2B", "eCommerce",
-  "Design Systems", "Figma Expert", "Webflow", "Framer",
-  "User Research", "Usability Testing", "AI-Augmented Workflows",
+  "Senior Product Engineer", "Headless E-commerce", "B2B Wholesale Systems",
+  "Next.js", "Medusa.js", "Supabase", "React", "TypeScript",
+  "Framer Motion", "SaaS Architecture", "International Catalog", "API-First Commerce",
 ];
 
 
@@ -54,6 +55,7 @@ export default function Home() {
       <main>
         <Hero />
         <Marquee direction="left"  items={marqueeItems1} />
+        <ServicePillars />
         <FeaturedWork />
         <About />
 

@@ -7,24 +7,23 @@ const services = [
     num: "01",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="11" cy="11" r="7" /><path d="m21 21-4.35-4.35" />
+        <rect x="3" y="3" width="18" height="18" rx="3" /><path d="M3 9h18M9 21V9" />
       </svg>
     ),
-    title: "UX Strategy & Research",
-    description: "User interviews, personas, competitive analysis, usability testing, and heuristic evaluation. I design from evidence — not assumptions.",
-    deliverables: ["User research report", "Persona documentation", "Usability test findings", "Competitive audit"],
+    title: "SaaS Application Development",
+    description: "Full-stack SaaS product engineering — authentication, database architecture, API design, and polished React UI — shipped to production standard.",
+    deliverables: ["Next.js App Router (full-stack)", "Supabase auth & PostgreSQL", "REST / tRPC API design", "TypeScript throughout"],
   },
   {
     num: "02",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="3" width="8" height="8" rx="2" /><rect x="13" y="3" width="8" height="8" rx="2" />
-        <rect x="3" y="13" width="8" height="8" rx="2" /><rect x="13" y="13" width="8" height="8" rx="2" />
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" /><line x1="3" y1="6" x2="21" y2="6" /><path d="M16 10a4 4 0 0 1-8 0" />
       </svg>
     ),
-    title: "UI/UX & Product Design",
-    description: "End-to-end product design for SaaS, B2B, and eCommerce — high-fidelity interfaces, interactive prototypes, and responsive web & mobile implementations.",
-    deliverables: ["Wireframes & user flows", "Interactive Figma prototype", "High-fidelity UI screens", "Responsive web & mobile"],
+    title: "Headless E-commerce Storefronts",
+    description: "Custom Medusa.js backends paired with high-performance Next.js frontends — optimised for international wholesale flows, multi-currency, and B2B buyer portals.",
+    deliverables: ["Medusa.js storefront & admin", "B2B checkout & buyer portal", "Inventory & product APIs", "Multi-currency & tax logic"],
   },
   {
     num: "03",
@@ -33,42 +32,42 @@ const services = [
         <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
       </svg>
     ),
-    title: "Design Systems & Libraries",
-    description: "Scalable, well-documented Figma design systems with components, variants, auto-layout, design tokens, and style guides — built for teams, not just individuals.",
-    deliverables: ["Component library", "Design token system", "Style guide documentation", "Governance guidelines"],
+    title: "B2B Wholesale Catalog Systems",
+    description: "International product catalog architecture for export manufacturers — structured for EU and North American buyer UX, with bulk ordering and PDF export capability.",
+    deliverables: ["Product schema & taxonomy", "Bulk ordering & MOQ logic", "PDF catalog generation", "Buyer-facing portal & filters"],
   },
   {
     num: "04",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="3" width="18" height="18" rx="3" /><path d="M3 9h18M9 21V9" />
+        <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
       </svg>
     ),
-    title: "SaaS & Dashboard Design",
-    description: "Data-heavy dashboards, admin interfaces, and B2B platforms — translating complex data and workflows into clean, scannable, decision-ready UI.",
-    deliverables: ["Dashboard UI design", "Data visualization patterns", "Admin interface design", "B2B product flows"],
+    title: "Frontend Engineering & UI Systems",
+    description: "Pixel-perfect, fully responsive frontends built with React and Tailwind CSS, animated with Framer Motion — component libraries and design-token systems included.",
+    deliverables: ["React component libraries", "Tailwind CSS design tokens", "Framer Motion animations", "WCAG-compliant responsive UI"],
   },
   {
     num: "05",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
+        <path d="M18 20V10" /><path d="M12 20V4" /><path d="M6 20v-6" />
       </svg>
     ),
-    title: "Frontend Execution & Development",
-    description: "Beyond Figma, I write clean, responsive, and production-ready frontend code. I bridge the gap between design and engineering using modern frameworks like React, Next.js, and Tailwind CSS to ensure every design system is technically feasible and built to scale.",
-    deliverables: ["React & Next.js development", "Tailwind CSS & responsive UI", "Clean, production-ready code", "Design system implementation"],
+    title: "API Integration & Backend Services",
+    description: "Connecting storefronts and SaaS products to ERP systems, shipping APIs, payment gateways, and third-party wholesale platforms via reliable webhook pipelines.",
+    deliverables: ["Stripe / PayPal integration", "Shipment & logistics APIs", "ERP & CRM connectors", "Webhook & event pipelines"],
   },
   {
     num: "06",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
       </svg>
     ),
-    title: "Engineering Collaboration",
-    description: "Supporting developers with front-end ready concepts, HTML/CSS awareness, and design decisions grounded in technical feasibility.",
-    deliverables: ["Front-end ready concepts", "HTML/CSS awareness", "Developer handoff specs", "Technical feasibility reviews"],
+    title: "Performance & SEO Engineering",
+    description: "Core Web Vitals optimisation, server-side rendering strategies, and structured data markup for international search visibility — measured, not guessed.",
+    deliverables: ["LCP / CLS / INP audits", "SSR / ISR / Edge strategy", "Schema.org structured data", "Sitemap & robots engineering"],
   },
 ];
 
@@ -142,7 +141,7 @@ export default function Services() {
           marginBottom: "1.2rem",
           color: "var(--color-text)",
         }}>
-          What I Do
+          How I Deliver
         </h2>
         <p style={{
           fontSize: "1rem",
@@ -150,7 +149,7 @@ export default function Services() {
           lineHeight: 1.7,
           maxWidth: "560px",
         }}>
-          End-to-end product design — from the first user interview to the last design review before launch.
+          From scalable SaaS architecture to production-ready B2B storefronts — engineered to perform in international markets.
         </p>
       </div>
 

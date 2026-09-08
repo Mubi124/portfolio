@@ -287,3 +287,58 @@ img { display: block; max-width: 100%; }
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
 }
+
+/* ── HERO AMBIENT GLOW ── */
+.hero-glow {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(232, 201, 122, 0.07) 0%, transparent 68%);
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── PILLAR CARD ── */
+.pillar-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.pillar-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(232, 201, 122, 0.35);
+  box-shadow: 0 0 50px rgba(232, 201, 122, 0.07);
+}
+
+/* ── TECH TAG (accent pill inside pillar cards) ── */
+.tech-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.85rem;
+  background: rgba(232, 201, 122, 0.07);
+  border: 1px solid rgba(232, 201, 122, 0.2);
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
+  white-space: nowrap;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.tech-tag:hover {
+  background: rgba(232, 201, 122, 0.13);
+  border-color: rgba(232, 201, 122, 0.4);
+}
+
+/* ── REVEAL DELAY EXTENSION ── */
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+

@@ -3,9 +3,9 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 
 const skills = [
-  "SaaS Product Design", "UI/UX Design", "Design Systems", "Figma Advanced",
-  "User Research", "Usability Testing", "Webflow", "Framer", "AI Workflows",
-  "CRO", "WCAG 2.2", "Adobe Creative Suite",
+  "Next.js", "React", "TypeScript", "Medusa.js",
+  "Supabase", "Tailwind CSS", "Framer Motion", "REST APIs",
+  "B2B E-commerce", "SaaS Architecture", "Node.js", "Git & CI/CD",
 ];
 
 export default function About() {
@@ -61,7 +61,7 @@ export default function About() {
         >
           <Image
             src="/images/mubashir.jpg"
-            alt="Mubashir Ali — Senior UI/UX & Product Designer based in Lahore, Pakistan"
+            alt="Mubashir Ali — Senior Product Engineer based in Lahore, Pakistan"
             fill
             style={{ 
               objectFit: "cover", 
@@ -115,8 +115,9 @@ export default function About() {
               marginBottom: "1rem",
             }}
           >
-            I&apos;m Mubashir, a UX/UI &amp; Product Designer based in Lahore, Pakistan.
-            I specialize in designing digital products — with a core focus on AI-Powered B2B SaaS — that do two things well — work for users and drive business growth.
+            I&apos;m Mubashir, a Senior Product Engineer &amp; Frontend Developer based in Lahore, Pakistan.
+            I specialise in building scalable SaaS applications and high-performance B2B e-commerce
+            platforms that serve international wholesale manufacturers.
           </p>
 
           {/* Body paragraph 2 */}
@@ -128,9 +129,9 @@ export default function About() {
               marginBottom: "2rem",
             }}
           >
-            Over 5+ years, I&apos;ve owned end-to-end product design for AI-Powered B2B SaaS platforms, complex
-            dashboards, and eCommerce applications — from initial user research through shipped design
-            systems and live implementations.
+            Over 5+ years, I&apos;ve engineered headless storefronts with Medusa.js and Next.js,
+            architected Supabase-backed SaaS products, and built B2B wholesale catalog systems
+            for Sialkot export manufacturers targeting EU and North American buyers.
           </p>
 
           {/* Skills pills */}

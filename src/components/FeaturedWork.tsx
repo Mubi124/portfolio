@@ -17,6 +17,26 @@ interface Project {
 }
 
 const defaultProjects: Project[] = [
+  // ── B2B-FIRST ORDER: exporters see these immediately ──
+  {
+    title: "TrueGear Classic — B2B Export Branding",
+    description: "International wholesale catalog and brand identity system for a Sialkot sportswear manufacturer. Built to convert buyers from EU and North American markets.",
+    tags: ["B2B Wholesale Catalog", "Export Branding", "International Markets", "Sportswear"],
+    // TODO: Replace with real screenshot → /images/projects/truegear.jpg
+    imageUrl: "/images/projects/luxmode.jpg",
+    // TODO: Create case study page → /projects/truegear-classic
+    caseStudyUrl: "#contact",
+  },
+  {
+    title: "Dermakinesis — Headless E-commerce",
+    description: "Headless Medusa.js storefront with a custom Next.js frontend, Supabase backend, and a B2B wholesale ordering flow optimised for international distributor checkouts.",
+    tags: ["Headless Commerce", "Medusa.js", "Next.js", "Supabase", "B2B Wholesale"],
+    // TODO: Replace with real screenshot → /images/projects/dermakinesis.jpg
+    imageUrl: "/images/projects/nexuses.jpg",
+    // TODO: Create case study page → /projects/dermakinesis
+    caseStudyUrl: "#contact",
+  },
+  // ── Existing projects demoted to positions 3–5 ──
   {
     title: "Contrario AI Recruiting Platform",
     description: "AI-powered recruiting platform featuring specialized recruiter dashboards, intelligent AI-assisted workflows, and permission-aware views designed for enterprise hiring teams.",
@@ -32,7 +52,7 @@ const defaultProjects: Project[] = [
     caseStudyUrl: "/projects/leadpilot-ai-crm",
   },
   {
-    title: "NavSphere - Travel Operations Dashboard",
+    title: "NavSphere — Travel Operations Dashboard",
     description: "High-density travel operations control center featuring data-rich B2B dashboards, multi-parameter filtering, and real-time decision-support interfaces.",
     tags: ["Data-Rich B2B Dashboards", "Advanced Filtering", "Decision Support", "Travel Ops"],
     imageUrl: "/images/projects/nexuses.jpg",
