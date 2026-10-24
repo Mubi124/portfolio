@@ -56,7 +56,7 @@ export default function Hero() {
             textTransform: "uppercase",
           }}
         >
-          Open to B2B &amp; SaaS Projects
+          Open to Product Design Roles &amp; SaaS Projects
         </span>
       </div>
 
@@ -76,9 +76,9 @@ export default function Hero() {
           zIndex: 1,
         }}
       >
-        Senior Product
+        Senior UI/UX &amp;
         <br />
-        <span style={{ color: "var(--color-accent)" }}>Engineer &amp; Developer</span>
+        <span style={{ color: "var(--color-accent)" }}>Product Designer</span>
       </h1>
 
       {/* Sub-paragraph */}
@@ -94,8 +94,7 @@ export default function Hero() {
           zIndex: 1,
         }}
       >
-        Engineering scalable SaaS applications and high-performance B2B e-commerce platforms
-        — with Next.js, Medusa.js, and Supabase — for international wholesale manufacturers.
+        I design web and mobile SaaS products, dashboards, and Figma design systems for B2B and B2C teams, and work closely with developers to ship them with design fidelity. I also have working knowledge of HTML, CSS, JavaScript, and React.
       </p>
 
       {/* Call to Action Buttons */}

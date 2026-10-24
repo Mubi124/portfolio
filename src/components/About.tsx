@@ -61,7 +61,7 @@ export default function About() {
         >
           <Image
             src="/images/mubashir.jpg"
-            alt="Mubashir Ali — Senior Product Engineer based in Lahore, Pakistan"
+            alt="Mubashir Ali, Senior UI/UX & Product Designer based in Lahore, Pakistan"
             fill
             style={{ 
               objectFit: "cover", 
@@ -115,9 +115,7 @@ export default function About() {
               marginBottom: "1rem",
             }}
           >
-            I&apos;m Mubashir, a Senior Product Engineer &amp; Frontend Developer based in Lahore, Pakistan.
-            I specialise in building scalable SaaS applications and high-performance B2B e-commerce
-            platforms that serve international wholesale manufacturers.
+            I&apos;m Mubashir, a Senior UI/UX &amp; Product Designer based in Lahore, Pakistan. I design web and mobile SaaS products, dashboards, admin panels, and onboarding flows for B2B and B2C clients.
           </p>
 
           {/* Body paragraph 2 */}
@@ -129,9 +127,7 @@ export default function About() {
               marginBottom: "2rem",
             }}
           >
-            Over 5+ years, I&apos;ve engineered headless storefronts with Medusa.js and Next.js,
-            architected Supabase-backed SaaS products, and built B2B wholesale catalog systems
-            for Sialkot export manufacturers targeting EU and North American buyers.
+            Over 5+ years, I&apos;ve turned complex business requirements into clear interfaces through wireframes, user flows, prototypes, and usability testing in Figma. I build and maintain design systems and work closely with developers in Agile teams so the final product matches the design. I also have working knowledge of HTML, CSS, JavaScript, and React.
           </p>
 
           {/* Skills pills */}
